@@ -827,22 +827,22 @@ async function importTrip({snap,media},onStep=()=>{}){
   return {id:tripId,missing,count:items.filter(i=>!i.deleted).length};
 }
 function importSheet(){
-  let bundle=null;
+  let bundle=null; const picked=[]; // Picks accumulate: phone pickers can't grab a JSON and a photos folder in one go
   openSheet(`<h2>ייבוא טיול</h2>
-    <p class="muted" style="margin:0">בחר יחד את קובץ הטיול (‎.json‎) ואת כל התמונות והמסמכים שלו – או קובץ zip אחד שמכיל הכול. התמונות מותאמות לפי שם הקובץ. הטיול נכנס כטיול <b>פרטי</b>.</p>
-    <label class="filebtn">${ico("down")}בחירת קבצים<input type="file" id="ifiles" multiple accept=".json,.zip,application/json,application/zip,image/*,application/pdf"></label>
+    <p class="muted" style="margin:0">בחר יחד את קובץ הטיול (‎.json‎) ואת כל התמונות והמסמכים שלו – או קובץ zip אחד שמכיל הכול. התמונות מותאמות לפי שם הקובץ. אפשר לבחור בכמה סבבים – קודם את קובץ הטיול ואחר כך את התמונות. הטיול נכנס כטיול <b>פרטי</b>.</p>
+    <label class="filebtn" id="ipick">${ico("down")}<span>בחירת קבצים</span><input type="file" id="ifiles" multiple accept=".json,.zip,application/json,application/zip,image/*,application/pdf"></label>
     <div id="isum"></div>
     <div class="sheet-actions"><div style="display:flex;gap:8px"><button class="btn" id="igo" disabled>ייבא</button><button class="btn ghost" id="icancel">ביטול</button></div></div>`, root=>{
     const sum=root.querySelector("#isum"), go_=root.querySelector("#igo");
     root.querySelector("#icancel").onclick=closeSheet;
-    root.querySelector("#ifiles").onchange=async e=>{ const files=[...e.target.files]; e.target.value=""; if(!files.length) return;
+    root.querySelector("#ifiles").onchange=async e=>{ const files=[...e.target.files]; e.target.value=""; if(!files.length) return; picked.push(...files); root.querySelector("#ipick span").textContent="הוספת עוד קבצים";
       go_.disabled=true; sum.innerHTML=`<div class="isum">קורא את הקבצים…</div>`;
-      try{ bundle=await readBundle(files); }catch(err){ bundle=null; sum.innerHTML=`<div class="isum"><span class="bad">${err?.message==="jszip"?"כדי לפתוח zip צריך חיבור לאינטרנט בפעם הראשונה. אפשר גם לבחור את הקבצים עצמם.":"לא הצלחתי לקרוא את הקבצים."}</span></div>`; return; }
+      try{ bundle=await readBundle(picked); }catch(err){ bundle=null; sum.innerHTML=`<div class="isum"><span class="bad">${err?.message==="jszip"?"כדי לפתוח zip צריך חיבור לאינטרנט בפעם הראשונה. אפשר גם לבחור את הקבצים עצמם.":"לא הצלחתי לקרוא את הקבצים."}</span></div>`; return; }
       const s=bundle.snap; if(!s){ sum.innerHTML=`<div class="isum"><span class="bad">לא נמצא קובץ טיול. צריך לבחור גם את קובץ ה-json של הטיול.</span></div>`; return; }
       const refs=(s.items||[]).flatMap(i=>[...(i.files||[]),...(i.photos||[]),...(i.photo?[i.photo]:[])]).concat(s.trip.cover?[s.trip.cover]:[]).filter(r=>r?.file);
       const miss=refs.filter(r=>!bundle.media.has(baseName(r.file))).length;
       const k=x=>(s.items||[]).filter(i=>i.kind===x&&!i.deleted).length;
-      sum.innerHTML=`<div class="isum"><b>${esc(s.trip.name||"טיול")}</b><span>${k("day")} ימים · ${k("plan")} מקומות · ${k("stop")} עצירות · ${k("doc")} מסמכים · ${k("check")} פריטי רשימה</span><span>${refs.length-miss}/${refs.length} קבצים נמצאו</span>${miss?`<span class="bad">${miss} קבצים חסרים – אפשר לייבא בלעדיהם או לבחור שוב יחד איתם.</span>`:""}</div>`;
+      sum.innerHTML=`<div class="isum"><b>${esc(s.trip.name||"טיול")}</b><span>${k("day")} ימים · ${k("plan")} מקומות · ${k("stop")} עצירות · ${k("doc")} מסמכים · ${k("check")} פריטי רשימה</span><span>${refs.length-miss}/${refs.length} קבצים נמצאו</span>${miss?`<span class="bad">${miss} קבצים חסרים – לחץ "הוספת עוד קבצים" ובחר אותם, או ייבא בלעדיהם.</span>`:""}</div>`;
       go_.disabled=false; };
     go_.onclick=async()=>{ if(!bundle?.snap) return; go_.disabled=true;
       try{ const r=await importTrip(bundle,m=>{ go_.textContent=m.slice(0,28)+"…"; }); closeSheet(); toast(r.missing.length?`יובא ✓ (${r.missing.length} קבצים חסרים)`:"הטיול יובא ✓"); go("trip",r.id); }

@@ -1,11 +1,24 @@
-// Service worker: app shell precache + runtime cache for libraries, fonts and map tiles.
-const VERSION = "tj-v1";
-const SHELL = ["./", "./index.html", "./manifest.json", "./icon.svg", "./icon-192.png", "./icon-512.png"];
+// Service worker: precaches the app shell, geo data and libraries so the app opens with no connection.
+const VERSION = "tj-v2";
 const RUNTIME = "tj-runtime-v1";
+const SHELL = ["./", "./index.html", "./manifest.json", "./icon.svg", "./icon-192.png", "./icon-512.png",
+  "./geo/countries-50m.json", "./geo/num2a2.json", "./geo/places.json"];
+const LIBS = [
+  "https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js",
+  "https://cdn.jsdelivr.net/npm/exifr@7.1.3/dist/lite.umd.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js",
+];
 const RUNTIME_HOSTS = ["cdnjs.cloudflare.com", "cdn.jsdelivr.net", "unpkg.com", "fonts.googleapis.com", "fonts.gstatic.com", "basemaps.cartocdn.com"];
 
 self.addEventListener("install", e => {
-  e.waitUntil(caches.open(VERSION).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
+  e.waitUntil((async () => {
+    await (await caches.open(VERSION)).addAll(SHELL);
+    // Libraries are best-effort: a CDN hiccup shouldn't block installing the app.
+    const rt = await caches.open(RUNTIME);
+    await Promise.all(LIBS.map(u => rt.add(u).catch(() => {})));
+    await self.skipWaiting();
+  })());
 });
 
 self.addEventListener("activate", e => {

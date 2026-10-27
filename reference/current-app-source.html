@@ -1,0 +1,1037 @@
+<title>יומן מסעות</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Frank+Ruhl+Libre:wght@500;700;900&family=Assistant:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: night-flight journal — full-bleed photo heroes, glowing route over a dark map, colour-coded days as postcards. One deliberate dark look. */
+:root{
+  color-scheme:dark;
+  --night:#0B1226; --night2:#111B36; --card:#16213F; --card2:#1E2B52; --line:#2A3A66;
+  --ink:#F6F1E7; --muted:#A9B3CF; --dim:#7D88A8;
+  --gold:#FFC74A; --rose:#FF5A6E; --teal:#3FD6CB; --violet:#9B87FF; --green:#62D98F; --orange:#FF9F45; --sky:#56B2FF;
+  --sea:#081022; --land:#18264A; --land-hi:#2A3E72; --border:#33487E;
+  --on-gold:#1A1405;
+  --f-hand:"Amatic SC","Frank Ruhl Libre",serif;
+  --f-display:"Frank Ruhl Libre",Georgia,serif;
+  --f-body:"Assistant",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --r:22px;
+}
+*{box-sizing:border-box}
+html,body{background:var(--night)}
+body{color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;direction:rtl;padding-block:0 110px;overflow-x:hidden}
+.wrap{max-width:900px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.band{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,h4{margin:0;line-height:1.1;text-wrap:balance}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.mono{font-family:var(--f-mono);font-size:.8em;direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.sky{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(1200px 600px at 85% -10%,#24306a 0%,transparent 60%),radial-gradient(900px 500px at 0% 20%,#3a1d4a55 0%,transparent 60%),var(--night)}
+.sky canvas{width:100%;height:100%;display:block}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--night)}
+
+.btn{border:0;border-radius:999px;padding:11px 20px;font-weight:800;background:var(--gold);color:var(--on-gold);display:inline-flex;align-items:center;gap:8px;white-space:nowrap;box-shadow:0 6px 24px #ffc74a40}
+.btn svg{width:18px;height:18px}
+.btn.ghost{background:#ffffff12;color:var(--ink);box-shadow:none;border:1px solid #ffffff22}
+.btn.danger{background:transparent;color:var(--rose);border:1.5px solid var(--rose);box-shadow:none}
+.btn.small{padding:7px 14px;font-size:.88rem}
+.btn:disabled{opacity:.5;cursor:default}
+.glass{background:#0b122699;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid #ffffff22}
+.iconbtn{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;flex:none;color:var(--ink)}
+.iconbtn svg{width:20px;height:20px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;font-weight:700;font-size:.85rem;background:#ffffff14;border:1px solid #ffffff26;color:var(--ink);white-space:nowrap}
+.chip.gold{background:var(--gold);color:var(--on-gold);border-color:transparent}
+.chip.ok{color:var(--green);border-color:#62d98f66}
+.chip.lock{color:var(--muted)}
+.chip svg{width:14px;height:14px}
+
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;display:flex;align-items:center;gap:10px;padding-block:12px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--f-hand);font-weight:700;font-size:2.1rem;line-height:1}
+.home-hero{padding-block:8px 6px}
+.home-hero .kick{color:var(--gold);font-weight:800;letter-spacing:.08em;font-size:.85rem}
+.home-hero h1{font-family:var(--f-hand);font-weight:700;font-size:clamp(3.4rem,14vw,5.6rem);line-height:.92;margin-top:4px}
+.home-hero h1 em{font-style:normal;color:var(--gold)}
+.feature{position:relative;display:block;width:100%;border:0;padding:0;margin-top:18px;border-radius:28px;overflow:hidden;aspect-ratio:4/5;max-height:560px;max-width:100%;background:var(--card);text-align:start;box-shadow:0 20px 60px #0008}
+@media (min-width:620px){.feature{aspect-ratio:16/10}}
+.feature img,.pc img,.feature .art,.pc .art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.feature::after,.pc::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0b122600 30%,#0b1226cc 72%,#0b1226 100%)}
+.feature .ov{position:absolute;inset:auto 0 0 0;z-index:2;padding:22px;display:grid;gap:8px}
+.feature .count{font-family:var(--f-hand);font-weight:700;font-size:clamp(3.8rem,16vw,6.4rem);line-height:.85;color:var(--gold);text-shadow:0 4px 30px #0009}
+.feature .count small{font-size:.5em;color:var(--ink)}
+.feature h2{font-family:var(--f-display);font-weight:900;font-size:clamp(1.7rem,6vw,2.4rem)}
+.row{display:flex;flex-wrap:wrap;gap:6px}
+.feature .tl{position:absolute;top:16px;inset-inline-start:16px;z-index:2;display:flex;gap:6px}
+.sec{display:flex;align-items:baseline;justify-content:space-between;margin:34px 0 12px}
+.sec h3{font-family:var(--f-hand);font-weight:700;font-size:2.4rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.pc{position:relative;border:0;padding:0;border-radius:22px;overflow:hidden;aspect-ratio:3/4;max-width:100%;background:var(--card);text-align:start;box-shadow:0 10px 30px #0006;transition:transform .2s}
+.pc:hover{transform:translateY(-3px) rotate(-.4deg)}
+.pc .ov{position:absolute;inset:auto 0 0 0;z-index:2;padding:14px;display:grid;gap:6px}
+.pc h4{font-family:var(--f-hand);font-weight:700;font-size:2.1rem;line-height:.95}
+.pc .tl{position:absolute;top:10px;inset-inline-start:10px;z-index:2}
+.newcard{border:2px dashed #ffc74a77;background:#ffc74a0d;color:var(--gold);display:grid;place-items:center;align-content:center;gap:6px;font-family:var(--f-hand);font-weight:700;font-size:2rem;box-shadow:none}
+.newcard::after{display:none}
+.newcard svg{width:42px;height:42px}
+.empty{background:var(--card);border:1px dashed var(--line);border-radius:var(--r);padding:26px;text-align:center;color:var(--muted)}
+.empty h3{color:var(--ink);font-family:var(--f-hand);font-weight:700;font-size:2.3rem;margin-bottom:4px}
+.loading{padding:60px 0;text-align:center;color:var(--muted);font-family:var(--f-hand);font-weight:700;font-size:2.2rem}
+
+.thero{position:relative;min-height:min(62vh,520px);display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;background:var(--card)}
+.thero>img,.thero>.art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.thero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0b122680 0%,#0b122600 26%,#0b122600 45%,#0b1226e6 82%,var(--night) 100%)}
+.thero .topbar{position:relative;z-index:3}
+.thero .topbar .sp{flex:1}
+.thero .tt{position:relative;z-index:2;padding-block:0 18px;display:grid;gap:8px;width:100%}
+.thero h1{font-family:var(--f-hand);font-weight:700;font-size:clamp(3.6rem,15vw,6.2rem);line-height:.86;text-shadow:0 4px 30px #000a}
+.thero .desc{max-width:52ch;color:#e6e9f5;font-size:1.02rem;font-weight:600}
+.stats{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;margin-top:4px;padding-block:4px}
+.stat{flex:1 0 auto;min-width:92px;border-radius:18px;padding:10px 14px;background:var(--card);border:1px solid var(--line)}
+.stat b{display:block;font-family:var(--f-hand);font-weight:700;font-size:2.7rem;line-height:.9;color:var(--c,var(--gold))}
+.stat span{font-size:.8rem;color:var(--muted);font-weight:700}
+.stamps{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.stamp{font-family:var(--f-hand);font-weight:700;font-size:1.6rem;line-height:1;color:var(--rose);border:2px solid var(--rose);border-radius:8px;padding:2px 10px 4px;transform:rotate(-3deg);background:#ff5a6e14}
+.stamp:nth-child(2n){transform:rotate(2deg);color:var(--teal);border-color:var(--teal);background:#3fd6cb14}
+
+.mapbox{position:relative;height:min(58vh,520px);margin-top:18px;border-radius:26px;overflow:hidden;background:var(--sea);box-shadow:0 20px 60px #0009,inset 0 0 0 1px var(--line)}
+@media (max-width:620px){.mapbox{border-radius:0;margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)))}}
+.map{position:absolute;inset:0;touch-action:none}
+.map svg{width:100%;height:100%;display:block;background:radial-gradient(circle at 70% 30%,#0f1a38,var(--sea));direction:ltr}
+.land path{fill:var(--land);stroke:var(--border);stroke-width:.7;vector-effect:non-scaling-stroke}
+.land path.hi{fill:var(--land-hi)}
+.cdot{fill:var(--dim)}
+.clabel{fill:var(--muted);font:600 11px var(--f-body);paint-order:stroke;stroke:var(--land);stroke-width:3px;pointer-events:none;text-anchor:end}
+.rt{fill:none;stroke:var(--gold);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 6px #ffc74acc)}
+.pl{fill:none;stroke-width:3;stroke-linecap:round;stroke-dasharray:1 9;opacity:.95}
+@media (prefers-reduced-motion:no-preference){.pl{animation:flow 1.2s linear infinite}.rt.draw{stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw 1.6s ease-out forwards}.pulse{animation:pulse 2s ease-out infinite;transform-box:fill-box;transform-origin:center}}
+@keyframes flow{to{stroke-dashoffset:-20}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes pulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.6);opacity:0}}
+.mk{cursor:pointer}
+.mk .dot{stroke:#fff;stroke-width:2.5}
+.mk text{fill:#0b1226;font:800 11px var(--f-body);text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.mlabel{fill:#fff;font:700 12px var(--f-body);paint-order:stroke;stroke:var(--sea);stroke-width:4px;pointer-events:none;text-anchor:end}
+.maptools{position:absolute;top:12px;inset-inline-end:12px;display:grid;gap:8px;z-index:3}
+.daypills{position:absolute;top:12px;inset-inline-start:12px;inset-inline-end:64px;z-index:3;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-block:2px}
+.daypills button{border-radius:999px;padding:5px 12px;font-weight:800;font-size:.82rem;white-space:nowrap;background:#0b1226b3;color:var(--ink);border:1.5px solid var(--c,#ffffff55)}
+.daypills button[aria-pressed="true"]{background:var(--c,var(--gold));color:#0b1226}
+.mpop{position:absolute;z-index:4;inset:auto 12px 12px 12px;max-width:420px;margin-inline:auto;border-radius:20px;overflow:hidden;background:var(--card2);box-shadow:0 14px 40px #000b;display:grid;grid-template-columns:1fr 110px;min-height:110px}
+.mpop.noimg{grid-template-columns:1fr}
+.mpop img{width:110px;height:100%;object-fit:cover;grid-column:2;grid-row:1}
+.mpop .b{padding:12px 14px;display:grid;gap:4px;align-content:start;min-width:0;grid-column:1;grid-row:1}
+.mpop h4{font-family:var(--f-display);font-size:1.08rem;padding-inline-end:28px}
+.mpop .x{position:absolute;top:6px;inset-inline-end:8px;border:0;background:#0008;color:#fff;border-radius:50%;width:28px;height:28px}
+.mpop.noimg .x{inset-inline-end:8px}
+
+.tabs{position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:20;display:flex;gap:4px;margin-top:22px;padding:5px;border-radius:999px;overflow-x:auto;scrollbar-width:none}
+.tab{flex:1;border:0;background:none;padding:9px 14px;border-radius:999px;font-weight:800;color:var(--muted);white-space:nowrap;display:flex;gap:6px;align-items:center;justify-content:center}
+.tab[aria-selected="true"]{background:var(--gold);color:var(--on-gold)}
+.tab .n{font-size:.75rem;opacity:.7}
+.panel{padding-top:16px}
+
+.day{margin-top:20px;border-radius:26px;overflow:hidden;background:var(--card);border:1px solid var(--line)}
+.dhead{padding:18px 18px 16px;background:linear-gradient(135deg,var(--c) 0%,color-mix(in srgb,var(--c) 60%,#0b1226) 100%);color:#0b1226;display:grid;gap:4px}
+.dhead .dn{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.dhead .dn b{font-family:var(--f-hand);font-weight:700;font-size:3.3rem;line-height:.8}
+.dhead .dn span{font-weight:800;font-size:.95rem;opacity:.85}
+.dhead h3{font-family:var(--f-display);font-weight:900;font-size:1.35rem}
+.dhead p{margin:4px 0 0;font-size:.95rem;font-weight:600;opacity:.9;max-width:62ch}
+.dbody{padding:14px;display:grid;gap:12px}
+.schedbtn{justify-self:start;border:0;background:#ffffff10;border-radius:999px;padding:8px 14px;font-weight:800;color:var(--c);display:flex;gap:6px;align-items:center}
+.schedbtn svg{width:16px;height:16px;transition:transform .2s}
+.schedbtn[aria-expanded="true"] svg{transform:rotate(180deg)}
+.sched{list-style:none;margin:0;padding:0 16px 0 0;display:grid;border-inline-start:2px solid var(--c);margin-inline-start:6px}
+.sched li{display:grid;grid-template-columns:62px 1fr;gap:10px;padding-block:6px;position:relative}
+.sched li::before{content:"";position:absolute;inset-inline-start:-24px;top:12px;width:12px;height:12px;border-radius:50%;background:var(--night);border:3px solid var(--c)}
+.sched .h{font-weight:800;color:var(--c);font-variant-numeric:tabular-nums}
+.place{display:grid;grid-template-columns:minmax(0,1fr) 104px;gap:12px;background:var(--night2);border-radius:18px;padding:10px;align-items:start}
+.place.noimg{grid-template-columns:1fr}
+.place .ph{width:104px;aspect-ratio:1;border-radius:14px;overflow:hidden;border:0;padding:0;background:var(--card2);grid-column:2;grid-row:1}
+.place .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.place .inf{display:grid;gap:4px;min-width:0;padding:4px 4px 2px;grid-column:1;grid-row:1}
+.place.big{grid-template-columns:1fr}
+.place.big .ph{grid-column:1;grid-row:1;width:100%;aspect-ratio:16/9}
+.place.big .inf{grid-row:2}
+.place .inf h4{font-family:var(--f-display);font-size:1.12rem;font-weight:700}
+.place.done{opacity:.6}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-size:.75rem;font-weight:800;padding:2px 9px;border-radius:999px;background:#ffffff10;color:var(--muted);display:inline-flex;gap:4px;align-items:center}
+.tag.t{color:var(--c);background:color-mix(in srgb,var(--c) 16%,transparent)}
+.tag.warn{color:var(--orange);background:#ff9f4520}
+.tag svg{width:12px;height:12px}
+.clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin:2px 0 0;color:#d9deef;font-size:.94rem}
+.clamp.open{display:block}
+.more{border:0;background:none;color:var(--c);font-weight:800;padding:0;justify-self:start;font-size:.88rem}
+.acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.lnk{display:inline-flex;align-items:center;gap:5px;font-weight:800;font-size:.85rem;text-decoration:none;color:var(--ink);background:#ffffff12;border-radius:999px;padding:7px 12px;border:0}
+.lnk svg{width:14px;height:14px}
+.lnk.go{background:var(--c,var(--gold));color:#0b1226}
+
+.jday{margin-top:24px}
+.jhead{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
+.jhead b{font-family:var(--f-hand);font-weight:700;font-size:2.9rem;line-height:.8;color:var(--c)}
+.jhead span{color:var(--muted);font-weight:700}
+.stop{border-radius:24px;overflow:hidden;background:var(--card);border:1px solid var(--line);margin-bottom:14px}
+.stop .mosaic{display:grid;gap:3px;grid-template-columns:2fr 1fr;grid-auto-rows:120px}
+.stop .mosaic button{border:0;padding:0;background:var(--card2);overflow:hidden}
+.stop .mosaic button:first-child{grid-row:span 2}
+.stop .mosaic.one{grid-template-columns:1fr;grid-auto-rows:auto}
+.stop .mosaic.one button{aspect-ratio:4/3;grid-row:auto}
+.stop .mosaic img{width:100%;height:100%;object-fit:cover;display:block}
+.stop .b{padding:14px 16px;display:grid;gap:6px}
+.stop h4{font-family:var(--f-display);font-weight:900;font-size:1.3rem}
+.leg{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:.85rem;font-weight:700;margin:-4px 0 10px;padding-inline-start:18px}
+.leg i{flex:0 0 40px;border-top:2px dashed var(--gold)}
+
+.dgrp{margin-top:22px}
+.dgrp>h3{font-family:var(--f-hand);font-weight:700;font-size:2.2rem;margin-bottom:8px;color:var(--c)}
+.pass{position:relative;display:grid;grid-template-columns:1fr auto;border-radius:20px;background:linear-gradient(135deg,var(--card2),var(--card));border:1px solid var(--line);overflow:hidden;margin-bottom:10px}
+.pass .main{padding:14px 16px;display:grid;gap:6px;min-width:0}
+.pass .stub{padding:14px 12px;border-inline-start:2px dashed var(--line);display:grid;place-items:center;align-content:center;gap:2px;width:92px;background:color-mix(in srgb,var(--c) 14%,transparent);color:var(--c)}
+.pass .stub b{font-family:var(--f-hand);font-weight:700;font-size:2.3rem;line-height:.9}
+.pass .stub b svg{width:30px;height:30px}
+.pass .stub span{font-size:.72rem;color:var(--muted);font-weight:800}
+.pass::before,.pass::after{content:"";position:absolute;width:18px;height:18px;border-radius:50%;background:var(--night);left:83px}
+.pass::before{top:-9px}.pass::after{bottom:-9px}
+.pass h4{font-family:var(--f-display);font-weight:900;font-size:1.15rem}
+.ref{display:inline-flex;align-items:center;gap:8px;background:#ffffff10;border-radius:10px;padding:3px 4px 3px 10px;width:max-content;max-width:100%}
+.ref b{font-family:var(--f-mono);letter-spacing:.06em;direction:ltr}
+.ref button{border:0;background:var(--gold);color:var(--on-gold);font-size:.75rem;font-weight:800;border-radius:7px;padding:3px 8px}
+.files{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.file{display:flex;align-items:center;gap:8px;border-radius:12px;padding:4px 12px 4px 4px;font-size:.85rem;font-weight:700;color:var(--ink);text-decoration:none;background:#ffffff10;max-width:100%}
+.file img{width:40px;height:40px;object-fit:cover;border-radius:9px}
+.file .pdf{width:40px;height:40px;border-radius:9px;background:var(--rose);color:#fff;display:grid;place-items:center;font:800 .7rem var(--f-body);flex:none}
+.file span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+
+.drive{background:linear-gradient(135deg,#1c2f5a,var(--card));border:1px solid #56b2ff44;border-radius:22px;padding:14px 16px;margin-bottom:6px;display:grid;gap:4px}
+.drive .dh{display:flex;align-items:center;gap:12px}
+.drive b{font-size:1.05rem}
+.lnk svg[viewBox="0 0 87 78"],.file svg[viewBox="0 0 87 78"],.filebtn svg[viewBox="0 0 87 78"]{width:20px;height:18px}
+.dpick{display:grid;gap:8px;background:var(--night2);border-radius:16px;padding:10px}
+.dlist{display:grid;gap:6px;max-height:260px;overflow:auto}
+.drow{display:flex;align-items:center;gap:10px;border:0;background:#ffffff0d;border-radius:12px;padding:6px 10px 6px 6px;text-align:start;color:var(--ink)}
+.drow .pdf{width:38px;height:38px;border-radius:9px;background:var(--rose);color:#fff;display:grid;place-items:center;font:800 .68rem var(--f-body);flex:none}
+.drow .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}
+.cgrp{margin-top:20px;background:var(--card);border-radius:24px;padding:16px;border:1px solid var(--line)}
+.cgh{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.cgh h3{font-family:var(--f-hand);font-weight:700;font-size:2.2rem;flex:1}
+.ring{width:56px;height:56px;flex:none}
+.ring circle{fill:none;stroke-width:6}
+.ring text{fill:var(--ink);font:800 13px var(--f-body);text-anchor:middle;dominant-baseline:central}
+.check{display:flex;align-items:center;gap:12px;padding:10px 4px;border-top:1px solid var(--line)}
+.check input{appearance:none;-webkit-appearance:none;width:24px;height:24px;border-radius:8px;border:2px solid var(--c);flex:none;display:grid;place-items:center;margin:0;background:transparent}
+.check input:checked{background:var(--c)}
+.check input:checked::after{content:"";width:6px;height:11px;border:solid #0b1226;border-width:0 3px 3px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.check label{flex:1;min-width:0;overflow-wrap:anywhere;font-weight:600}
+.check.done label{text-decoration:line-through;color:var(--dim)}
+.check .x{border:0;background:none;color:var(--dim);font-size:1.3rem;padding:0 4px}
+.addrow{display:flex;gap:8px;margin-top:10px}
+.addrow input{flex:1;min-width:0}
+
+.fab{position:fixed;bottom:calc(22px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);z-index:25;padding:14px 24px;font-size:1.02rem}
+.scrim{position:fixed;inset:0;background:#02050ccc;z-index:40;display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:var(--card);border:1px solid var(--line);width:100%;max-width:640px;max-height:92vh;overflow:auto;border-radius:28px 28px 0 0;padding:20px max(18px,env(safe-area-inset-left,0px)) calc(18px + env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-right,0px));display:grid;gap:12px}
+@media (min-width:700px){.scrim{align-items:center}.sheet{border-radius:28px;max-height:88vh}}
+.sheet h2{font-family:var(--f-hand);font-weight:700;font-size:2.6rem;color:var(--gold)}
+.f{display:grid;gap:4px}
+.f>span{font-size:.82rem;font-weight:800;color:var(--muted);letter-spacing:.03em}
+.f small{color:var(--muted)}
+input[type=text],input[type=date],input[type=time],textarea,select{width:100%;border:1px solid var(--line);background:var(--night2);border-radius:14px;padding:10px 12px;color:var(--ink)}
+textarea{min-height:90px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.typegrid{display:flex;flex-wrap:wrap;gap:6px}
+.typegrid label{cursor:pointer;position:relative}
+.typegrid input{position:absolute;opacity:0;pointer-events:none}
+.typegrid span{display:inline-flex;gap:6px;align-items:center;padding:7px 12px;border-radius:999px;background:#ffffff10;font-weight:800;font-size:.88rem;border:1.5px solid transparent}
+.typegrid span svg{width:16px;height:16px;color:var(--c)}
+.typegrid input:checked+span{border-color:var(--c);background:color-mix(in srgb,var(--c) 18%,transparent)}
+.typegrid input:focus-visible+span{outline:2px solid var(--gold)}
+.picker{position:relative;height:240px;border-radius:18px;overflow:hidden;background:var(--sea)}
+.picker .pin{position:absolute;left:50%;top:50%;width:30px;height:30px;margin:-30px 0 0 -15px;pointer-events:none;z-index:2;color:var(--rose);filter:drop-shadow(0 3px 6px #000a)}
+.picker .coord{position:absolute;bottom:8px;left:8px;z-index:2;border-radius:8px;padding:2px 8px}
+.results{display:flex;flex-wrap:wrap;gap:6px}
+.results button{border:0;background:#ffffff14;border-radius:999px;padding:5px 12px;font-size:.88rem;font-weight:700}
+.thumbs{display:flex;flex-wrap:wrap;gap:8px}
+.thumb{position:relative;width:76px;height:76px;border-radius:14px;overflow:hidden;background:var(--card2)}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb button{position:absolute;top:3px;inset-inline-end:3px;width:22px;height:22px;border-radius:50%;border:0;background:#000b;color:#fff;font-size:13px;line-height:1}
+.filebtn{display:inline-flex;align-items:center;gap:8px;border:2px dashed #ffc74a66;border-radius:16px;padding:12px 16px;font-weight:800;color:var(--gold);cursor:pointer;justify-self:start}
+.filebtn svg{width:18px;height:18px}
+.filebtn input{display:none}
+.switch{display:flex;align-items:center;gap:12px;background:var(--night2);border-radius:16px;padding:12px 14px}
+.switch input{width:22px;height:22px;accent-color:var(--green);flex:none}
+.sheet-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between;align-items:center;position:sticky;bottom:calc(-18px - env(safe-area-inset-bottom,0px));background:var(--card);padding-block:12px}
+.toast{position:fixed;bottom:calc(92px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--gold);color:var(--on-gold);padding:10px 18px;border-radius:999px;z-index:80;font-weight:800;max-width:calc(100% - 32px);box-shadow:0 10px 30px #0008}
+.lightbox{position:fixed;inset:0;background:#000f;z-index:90;display:grid;place-items:center}
+.lightbox img{max-width:100vw;max-height:86vh;object-fit:contain}
+.lightbox .lb{position:absolute;color:#fff;background:#ffffff22;border:0;border-radius:50%;width:46px;height:46px;font-size:22px}
+.lightbox .cap{position:absolute;bottom:calc(18px + env(safe-area-inset-bottom,0px));inset-inline:16px;text-align:center;color:#fff;font-weight:700}
+@media (prefers-reduced-motion:no-preference){.sheet{animation:up .25s cubic-bezier(.2,.9,.3,1.2)}@keyframes up{from{transform:translateY(40px);opacity:.4}}}
+</style>
+
+<div class="sky" aria-hidden="true"><canvas id="stars"></canvas></div>
+<div id="app"><div class="loading">פותח את היומן…</div></div>
+
+<script id="topo" type="application/json">/*TOPO*/</script>
+<script id="num2a2" type="application/json">/*NUM2A2*/</script>
+<script id="places" type="application/json">/*PLACES*/</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/exifr@7.1.3/dist/lite.umd.js"></script>
+<script>
+"use strict";
+const $ = (s, r=document) => r.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+const urlCache = new Map();
+const assetSrc = a => urlCache.get(a.id) || "/_blob/" + a.id;
+function toast(msg, ms=2600){ const t=document.createElement("div"); t.className="toast"; t.textContent=msg; document.body.append(t); setTimeout(()=>t.remove(), ms); }
+const fmtDay = new Intl.DateTimeFormat("he-IL",{weekday:"long",day:"numeric",month:"long"});
+const fmtShort = new Intl.DateTimeFormat("he-IL",{day:"numeric",month:"short"});
+const parseD = s => { if(!s) return null; const [y,m,d]=s.split("-").map(Number); return new Date(y,m-1,d); };
+const dayDiff = (a,b) => Math.round((parseD(b)-parseD(a))/864e5);
+const ymd = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+const todayStr = () => ymd(new Date());
+function rangeText(t){ if(!t.start) return "בלי תאריכים"; if(!t.end||t.end===t.start) return fmtShort.format(parseD(t.start)); return `${fmtShort.format(parseD(t.start))} – ${fmtShort.format(parseD(t.end))}`; }
+function hav(a,b){ const R=6371,r=Math.PI/180; const dLa=(b[1]-a[1])*r, dLo=(b[0]-a[0])*r; const x=Math.sin(dLa/2)**2+Math.cos(a[1]*r)*Math.cos(b[1]*r)*Math.sin(dLo/2)**2; return 2*R*Math.asin(Math.sqrt(x)); }
+const fmtKm = n => n<10 ? n.toFixed(1) : Math.round(n).toLocaleString("he-IL");
+const gmaps = (lat,lng) => `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+function parseCoords(s){
+  if(!s) return null; try{ s=decodeURIComponent(s); }catch(e){}
+  const m = s.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/) || s.match(/@(-?\d+\.\d+),\s*(-?\d+\.\d+)/) || s.match(/[?&](?:q|query|ll)=(-?\d+\.\d+),\s*(-?\d+\.\d+)/) || s.match(/(-?\d{1,2}\.\d+)\s*,\s*(-?\d{1,3}\.\d+)/);
+  if(!m) return null; const lat=+m[1], lng=+m[2]; if(Math.abs(lat)>90||Math.abs(lng)>180) return null; return {lat,lng};
+}
+const DAYC = ["#FF5A6E","#FFC74A","#3FD6CB","#9B87FF","#62D98F","#FF9F45","#56B2FF"];
+const dayColor = (t, date) => { if(!date||!t?.start) return "#A9B3CF"; const n=dayDiff(t.start,date); return DAYC[((n%7)+7)%7]; };
+const ICONS = {
+  back:'<path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>',
+  gear:'<circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+  fit:'<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>',
+  plus:'<path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>',
+  chev:'<path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>',
+  flight:'<path d="M2.5 15.5l19-6.5-1.6-2-7.4 2-5-6-2 .8 2.8 6.2-4.6 1.8-2.1-1.8-1.1.9 1.9 3.9z" fill="currentColor"/>',
+  stay:'<path d="M3 20V9l9-5.5L21 9v11M9 20v-6h6v6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>',
+  car:'<path d="M5 16h14v-4l-2-5H7l-2 5zM7 16v2M17 16v2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>',
+  visit:'<path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="10" r="2.6" fill="currentColor"/>',
+  food:'<path d="M7 3v8M5 3v5a2 2 0 004 0V3M7 11v10M16 3c-2 1-3 4-3 7h3v11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>',
+  nature:'<path d="M12 3l6 9H6zM12 8l7 11H5zM12 19v3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>',
+  shop:'<path d="M5 8h14l-1 13H6zM9 8V6a3 3 0 016 0v2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>',
+  other:'<circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="12" r="2.4" fill="currentColor"/>',
+  insurance:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>',
+  passport:'<rect x="5" y="3" width="14" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 16h6" stroke="currentColor" stroke-width="2"/>',
+  ticket:'<path d="M3 8a2 2 0 002-2h14a2 2 0 002 2v2a2 2 0 000 4v2a2 2 0 00-2 2H5a2 2 0 00-2-2v-2a2 2 0 000-4z" fill="none" stroke="currentColor" stroke-width="2.2"/>',
+  pin:'<path d="M12 22s-8-7-8-13a8 8 0 0116 0c0 6-8 13-8 13z" fill="currentColor"/><circle cx="12" cy="9" r="3.2" fill="#0b1226"/>',
+  star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z" fill="currentColor"/>',
+  lock:'<rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M8 11V8a4 4 0 018 0v3" fill="none" stroke="currentColor" stroke-width="2.2"/>',
+  users:'<circle cx="9" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M2.5 20c.6-3.8 3.2-6 6.5-6s5.9 2.2 6.5 6M16 4.6a3.5 3.5 0 010 6.8M18.5 14.5c1.7.8 2.7 2.8 3 5.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>',
+  map:'<path d="M9 4l-6 2.5v13.5l6-2.5 6 2.5 6-2.5V4l-6 2.5zM9 4v13.5M15 6.5V20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>',
+  up:'<path d="M12 16V4M6 10l6-6 6 6M4 20h16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>',
+  cam:'<path d="M4 8h3l2-3h6l2 3h3v11H4z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.5" fill="none" stroke="currentColor" stroke-width="2.2"/>',
+};
+const ico = (k,cls="") => `<svg viewBox="0 0 24 24" class="${cls}" aria-hidden="true">${ICONS[k]||ICONS.other}</svg>`;
+const PLAN_TYPES = {visit:"ביקור",nature:"טבע",stay:"לינה",food:"אוכל",shop:"קניות",flight:"טיסה",car:"נסיעה",other:"אחר"};
+const TYPE_C = {visit:"#56B2FF",nature:"#62D98F",stay:"#9B87FF",food:"#FF9F45",shop:"#FF5A6E",flight:"#FFC74A",car:"#3FD6CB",other:"#A9B3CF"};
+const DOC_CATS = {flight:["טיסות","#FFC74A"],stay:["לינה","#9B87FF"],car:["רכב ותחבורה","#3FD6CB"],ticket:["כרטיסים והזמנות","#FF5A6E"],insurance:["ביטוח","#62D98F"],passport:["דרכונים","#56B2FF"],other:["אחר","#A9B3CF"]};
+
+(function stars(){
+  const c=$("#stars"), x=c.getContext("2d"); let W,H,S=[];
+  const size=()=>{ const d=Math.min(2,devicePixelRatio||1); W=c.width=innerWidth*d; H=c.height=innerHeight*d; S=Array.from({length:Math.round(innerWidth*innerHeight/5200)},()=>({x:Math.random()*W,y:Math.random()*H,r:(Math.random()*1.3+.3)*d,p:Math.random()*6.28,s:.4+Math.random()*1.2})); };
+  size(); addEventListener("resize",size);
+  const still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const draw=t=>{ x.clearRect(0,0,W,H); for(const s of S){ x.globalAlpha=still?.6:.35+.45*Math.sin(s.p+t/1000*s.s); x.fillStyle="#fff"; x.beginPath(); x.arc(s.x,s.y,s.r,0,6.28); x.fill(); } if(!still) requestAnimationFrame(draw); };
+  requestAnimationFrame(draw);
+})();
+
+const TOPO = JSON.parse($("#topo").textContent);
+const NUM2A2 = JSON.parse($("#num2a2").textContent);
+const PLACES = JSON.parse($("#places").textContent);
+const norm = x => x.normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[łŁ]/g,"l").toLowerCase();
+PLACES.forEach(p=>p.push(norm(p[0])));
+function searchPlaces(q){ q=norm(q.trim()); if(q.length<2) return []; const a=[],b=[]; for(const p of PLACES){ if(p[5].startsWith(q)) a.push(p); else if(p[5].includes(q)) b.push(p); if(a.length>=8) break; } return a.concat(b).slice(0,8); }
+const COUNTRIES = topojson.feature(TOPO, TOPO.objects.countries).features;
+let heNames; try { heNames = new Intl.DisplayNames(["he"],{type:"region"}); } catch(e){ heNames=null; }
+function countryName(f){ const a2=NUM2A2[+f.id]; try{ if(a2&&heNames){ const n=heNames.of(a2); if(n&&n!==a2) return n; } }catch(e){} return f.properties.name; }
+const countryCache = new Map();
+function countryAt(lng,lat){ const k=lng.toFixed(3)+","+lat.toFixed(3); if(countryCache.has(k)) return countryCache.get(k); let r=null; for(const f of COUNTRIES){ if(d3.geoContains(f,[lng,lat])){ r=f; break; } } countryCache.set(k,r); return r; }
+
+let clipN=0;
+class TripMap {
+  constructor(host, opts={}){
+    this.host=host; this.opts=opts; host.classList.add("map");
+    this.svg=d3.select(host).append("svg").attr("role","img").attr("aria-label","מפת המסלול");
+    this.defs=this.svg.append("defs");
+    this.gLand=this.svg.append("g").attr("class","land");
+    this.gOver=this.svg.append("g");
+    this.t=d3.zoomIdentity; this.stops=[]; this.plans=[]; this.hi=new Set(); this.trip=null;
+    this.zoom=d3.zoom().scaleExtent([1,6000]).on("zoom",e=>{ this.t=e.transform; this.apply(); }).on("end",()=>this.opts.onMove&&this.opts.onMove(this.center()));
+    this.svg.call(this.zoom).on("dblclick.zoom",null).on("click",()=>this.opts.onBlank&&this.opts.onBlank());
+    this.ro=new ResizeObserver(()=>this.resize()); this.ro.observe(host);
+    this.resize();
+  }
+  resize(){
+    const w=this.host.clientWidth, h=this.host.clientHeight; if(!w||!h) return; if(w===this.w&&h===this.h) return;
+    const keep=this.w?this.center():null, keepK=this.t.k;
+    this.w=w; this.h=h;
+    this.proj=d3.geoMercator().scale(w/(2*Math.PI)).translate([w/2,h/2]).precision(0);
+    this.path=d3.geoPath(this.proj);
+    this.gLand.selectAll("path").data(COUNTRIES).join("path").attr("d",this.path);
+    this.zoom.extent([[0,0],[w,h]]).translateExtent([[-w*.5,h/2-w*.62],[w*1.5,h/2+w*.62]]);
+    this.paintHi();
+    if(this.pending){ const p=this.pending; this.pending=null; this.fit(p.pts,p.opt); }
+    else if(keep) this.centerOn(keep,keepK,false); else this.apply();
+  }
+  paintHi(){ this.gLand.selectAll("path").classed("hi",d=>this.hi.has(d.id)); }
+  setData(stops, plans, trip){
+    this.stops=stops; this.plans=plans; this.trip=trip;
+    this.hi=new Set(); for(const s of [...stops,...plans]){ const c=countryAt(s.lng,s.lat); if(c) this.hi.add(c.id); }
+    this.paintHi(); this.apply();
+  }
+  screen(lng,lat){ return this.t.apply(this.proj([lng,lat])); }
+  line(pts){
+    let d="";
+    for(let i=0;i<pts.length;i++){
+      if(i===0){ const s=this.screen(pts[0][0],pts[0][1]); d+=`M${s[0].toFixed(1)},${s[1].toFixed(1)}`; continue; }
+      const a=pts[i-1], b=pts[i], n=Math.min(48,Math.max(1,Math.ceil(hav(a,b)/80))), ip=d3.geoInterpolate(a,b);
+      for(let j=1;j<=n;j++){ const q=ip(j/n), s=this.screen(q[0],q[1]); d+=`L${s[0].toFixed(1)},${s[1].toFixed(1)}`; }
+    }
+    return d;
+  }
+  apply(){
+    if(!this.proj) return;
+    this.gLand.attr("transform",this.t);
+    const g=this.gOver; g.selectAll("*").remove(); this.defs.selectAll("*").remove();
+    const k=this.t.k, maxRank=Math.min(10,Math.floor(Math.log2(k))-1);
+    if(maxRank>=0){ const used=new Set(); let n=0;
+      for(const p of PLACES){ if(p[4]>maxRank) continue; const [x,y]=this.screen(p[3],p[2]); if(x<-20||y<-10||x>this.w+20||y>this.h+10) continue;
+        const key=Math.floor(x/110)+":"+Math.floor(y/26); if(used.has(key)) continue; used.add(key);
+        g.append("circle").attr("class","cdot").attr("cx",x).attr("cy",y).attr("r",2.2); g.append("text").attr("class","clabel").attr("x",x-5).attr("y",y+4).text(p[0]); if(++n>60) break; } }
+    for(let i=1;i<this.plans.length;i++){ const a=this.plans[i-1], b=this.plans[i];
+      g.append("path").attr("class","pl").attr("stroke",dayColor(this.trip,b.date)).attr("d",this.line([[a.lng,a.lat],[b.lng,b.lat]])); }
+    const sp=this.stops.map(p=>[p.lng,p.lat]);
+    if(sp.length>1){ const p=g.append("path").attr("class","rt").attr("d",this.line(sp)); if(this.animateNext){ const L=p.node().getTotalLength(); p.classed("draw",true).style("--len",L); this.animateNext=false; } }
+    const showLabels=k>=150;
+    this.plans.forEach(p=>{ const [x,y]=this.screen(p.lng,p.lat); if(x<-30||y<-30||x>this.w+30||y>this.h+30) return; const c=dayColor(this.trip,p.date);
+      const m=g.append("g").attr("class","mk").attr("transform",`translate(${x},${y})`);
+      m.append("circle").attr("class","dot").attr("r",7.5).attr("fill",c);
+      m.on("click",e=>{ e.stopPropagation(); this.opts.onMarker&&this.opts.onMarker(p); }); });
+    this.stops.forEach((p,i)=>{ const [x,y]=this.screen(p.lng,p.lat); if(x<-40||y<-40||x>this.w+40||y>this.h+40) return;
+      const m=g.append("g").attr("class","mk").attr("transform",`translate(${x},${y})`);
+      if(i===this.stops.length-1) m.append("circle").attr("class","pulse").attr("r",16).attr("fill","#FFC74A");
+      const ph=p.photos?.[0];
+      if(ph){ const id="cl"+(++clipN); this.defs.append("clipPath").attr("id",id).append("circle").attr("r",17);
+        m.append("circle").attr("r",20).attr("fill","#FFC74A");
+        m.append("image").attr("href",assetSrc(ph)).attr("x",-17).attr("y",-17).attr("width",34).attr("height",34).attr("preserveAspectRatio","xMidYMid slice").attr("clip-path",`url(#${id})`);
+      } else { m.append("circle").attr("class","dot").attr("r",12).attr("fill","#FFC74A"); m.append("text").text(i+1); }
+      if(showLabels) g.append("text").attr("class","mlabel").attr("x",x-24).attr("y",y+4).text(p.title||"");
+      m.on("click",e=>{ e.stopPropagation(); this.opts.onMarker&&this.opts.onMarker(p); }); });
+  }
+  center(){ if(!this.proj) return null; const ll=this.proj.invert(this.t.invert([this.w/2,this.h/2])); return {lng:ll[0],lat:ll[1]}; }
+  centerOn(c,k,animate=true){
+    if(!this.proj){ this.pending={pts:[[c.lng,c.lat]],opt:{k}}; return; }
+    const p=this.proj([c.lng,c.lat]); const t=d3.zoomIdentity.translate(this.w/2-k*p[0], this.h/2-k*p[1]).scale(k);
+    (animate?this.svg.transition().duration(600):this.svg).call(this.zoom.transform,t);
+  }
+  fit(pts,opt={}){
+    if(!this.proj){ this.pending={pts,opt}; return; }
+    if(!pts.length) pts=[[-150,62],[170,-45]];
+    if(pts.length===1||opt.k) return this.centerOn({lng:pts[0][0],lat:pts[0][1]}, opt.k||900, opt.animate!==false);
+    const xy=pts.map(p=>this.proj(p)); const [x0,x1]=d3.extent(xy,p=>p[0]), [y0,y1]=d3.extent(xy,p=>p[1]);
+    const padTop=opt.padTop||60, pad=opt.pad||44;
+    let k=Math.min(Math.max(this.w-pad*2,40)/Math.max(x1-x0,1e-4), Math.max(this.h-padTop-pad,40)/Math.max(y1-y0,1e-4)); k=Math.min(Math.max(k,1),2500);
+    const t=d3.zoomIdentity.translate(this.w/2-k*(x0+x1)/2, (this.h+padTop-pad)/2-k*(y0+y1)/2).scale(k);
+    (opt.animate===false?this.svg:this.svg.transition().duration(700)).call(this.zoom.transform,t);
+  }
+  destroy(){ this.ro.disconnect(); this.svg.remove(); }
+}
+
+const S = { db:null, user:null, assets:null, isOwner:false, canWrite:true, ready:false,
+  trips:{private:new Map(), shared:new Map()}, loaded:{private:false, shared:false},
+  view:{name:"home"}, items:[], itemsFor:null, unsubItems:null, tab:"plan", map:null, dayFilter:null, open:new Set() };
+const tripsCol = sp => S.db.collection(`sp/${sp}/trips`);
+const itemsCol = (sp,id) => S.db.collection(`sp/${sp}/trips/${id}/items`);
+
+async function boot(){
+  const [db,user,assets,mcp] = await Promise.all([claude.use("db"), claude.use("user"), claude.use("assets"), claude.use("mcp")]);
+  S.db=db; S.user=user; S.assets=assets; S.mcp=mcp;
+  if(!db){ $("#app").innerHTML=`<div class="wrap"><div class="empty" style="margin-top:60px"><h3>היומן לא זמין כאן</h3>צריך להיכנס לחשבון Claude כדי לראות ולשמור טיולים.</div></div>`; return; }
+  S.isOwner = user ? await user.isOwner() : false;
+  const cw = user ? await user.can("data.write") : null; S.canWrite = cw!==false;
+  const spaces = S.isOwner ? ["private","shared"] : ["shared"];
+  if(!S.isOwner) S.loaded.private=true;
+  for(const sp of spaces){
+    tripsCol(sp).onSnapshot(snap=>{
+      const m=new Map(); snap.docs.forEach(d=>m.set(d.id,{...d.data(),id:d.id,space:sp})); S.trips[sp]=m; S.loaded[sp]=true;
+      if(S.view.name==="home") render();
+      else if(S.view.name==="trip" && !S.moving){ if(currentTrip() && $("#tname")) renderTripHead(); else render(); }
+    }, ()=>{ S.loaded[sp]=true; render(); });
+  }
+  S.ready=true;
+  window.addEventListener("hashchange", route); route();
+}
+function currentTrip(){ const v=S.view; return v.name==="trip" ? S.trips[v.space]?.get(v.id) : null; }
+function route(){
+  const m=location.hash.slice(1).match(/^t-(private|shared)-([A-Za-z0-9]+)$/);
+  if(m) openTrip(m[1],m[2]); else { closeItems(); S.view={name:"home"}; render(); scrollTo(0,0); }
+}
+function go(name, sp, id){ const h = name==="trip" ? `#t-${sp}-${id}` : ""; if(location.hash!==h){ if(h) location.hash=h; else { history.replaceState(null,"",location.pathname+location.search); route(); } } else route(); }
+function closeItems(){ if(S.unsubItems){ S.unsubItems(); S.unsubItems=null; } S.items=[]; S.itemsFor=null; if(S.map){ S.map.destroy(); S.map=null; } }
+function openTrip(sp,id){
+  const key=sp+"/"+id;
+  if(S.itemsFor!==key){ closeItems(); S.itemsFor=key; S.itemsLoaded=false; S.fitted=false; S.dayFilter=null; S.open=new Set();
+    S.unsubItems = itemsCol(sp,id).onSnapshot(snap=>{ S.items=snap.docs.map(d=>({...d.data(),id:d.id})); S.itemsLoaded=true; if(S.view.name==="trip") renderTripBody(); }, ()=>{ S.itemsLoaded=true; renderTripBody(); });
+    scrollTo(0,0); }
+  S.view={name:"trip",space:sp,id}; render();
+}
+
+const byWhen = (a,b) => (a.date||"9999").localeCompare(b.date||"9999") || (a.time||"").localeCompare(b.time||"") || (a.createdAt||0)-(b.createdAt||0);
+const stopsOf = items => items.filter(i=>i.kind==="stop").sort(byWhen);
+const plansOf = items => items.filter(i=>i.kind==="plan").sort(byWhen);
+function statsOf(trip, items){
+  const stops=stopsOf(items).filter(s=>s.lat!=null);
+  let km=0; for(let i=1;i<stops.length;i++) km+=hav([stops[i-1].lng,stops[i-1].lat],[stops[i].lng,stops[i].lat]);
+  let pkm=0; const pl=plansOf(items).filter(p=>p.lat!=null); for(let i=1;i<pl.length;i++) pkm+=hav([pl[i-1].lng,pl[i-1].lat],[pl[i].lng,pl[i].lat]);
+  const cs=new Map(); (stops.length?stops:pl).forEach(s=>{ const c=countryAt(s.lng,s.lat); if(c) cs.set(c.id,countryName(c)); });
+  const photos=items.filter(i=>i.kind==="stop").reduce((n,s)=>n+(s.photos?.length||0),0);
+  const days = trip.start&&trip.end ? dayDiff(trip.start,trip.end)+1 : 0;
+  return {km, pkm, countries:[...cs.values()], photos, days, stops:stopsOf(items).length, places:plansOf(items).length};
+}
+
+function render(){
+  if(S.view.name==="trip") return renderTrip();
+  const app=$("#app");
+  app.innerHTML = homeHTML();
+  app.querySelectorAll("[data-trip]").forEach(b=>b.onclick=()=>{ const [sp,id]=b.dataset.trip.split("/"); go("trip",sp,id); });
+  app.querySelectorAll("[data-new]").forEach(b=>b.onclick=()=>tripSheet(null));
+  app.querySelectorAll("[data-restore]").forEach(b=>b.onclick=restoreFromDrive);
+}
+function coverHTML(t){ return t.cover ? `<img src="${esc(assetSrc(t.cover))}" alt="" loading="lazy">` : coverArt(t); }
+function shareChip(t){ return !S.isOwner ? "" : t.space==="private" ? `<span class="chip glass lock">${ico("lock")}פרטי</span>` : `<span class="chip glass ok">${ico("users")}משותף</span>`; }
+function homeHTML(){
+  const loading = !S.ready || !S.loaded.private || !S.loaded.shared;
+  const all=[...S.trips.private.values(), ...S.trips.shared.values()];
+  const today=todayStr();
+  const upcoming=all.filter(t=>!t.end||t.end>=today).sort((a,b)=>(a.start||"9").localeCompare(b.start||"9"));
+  const past=all.filter(t=>t.end&&t.end<today).sort((a,b)=>b.start.localeCompare(a.start));
+  const top=`<div class="wrap"><div class="topbar"><div class="logo">${logoSvg()}<span>יומן מסעות</span></div></div>`;
+  if(loading) return top+`<div class="loading">אוסף את הטיולים…</div></div>`;
+  const feat=upcoming[0];
+  let html=top+`<div class="home-hero"><div class="kick">${S.isOwner?"הטיולים שלי":"טיולים ששותפו איתך"}</div><h1>לאן <em>נוסעים</em><br>עכשיו?</h1></div>`;
+  if(!all.length) return html+`<div class="empty" style="margin-top:20px"><h3>המסע הראשון מתחיל כאן</h3>תן לטיול שם ותאריכים, ואז הוסף תוכנית, מסמכים ותמונות מהדרך.${S.canWrite?`<div style="margin-top:16px"><button class="btn" data-new>${ico("plus")}טיול חדש</button></div>`:""}</div></div>`;
+  if(feat){
+    const inDays = feat.start ? dayDiff(today,feat.start) : null;
+    const count = inDays==null ? "" : inDays>1 ? `עוד ${inDays} <small>ימים</small>` : inDays===1 ? "מחר!" : inDays===0 ? "היום!" : "בדרכים";
+    html+=`<button class="feature" data-trip="${feat.space}/${esc(feat.id)}" aria-label="פתח את ${esc(feat.name)}">${coverHTML(feat)}<div class="tl">${shareChip(feat)}</div><div class="ov">${count?`<div class="count">${count}</div>`:""}<h2>${esc(feat.name)}</h2>${feat.desc?`<div class="muted" style="font-weight:600">${esc(feat.desc)}</div>`:""}<div class="row"><span class="chip gold">${esc(rangeText(feat))}</span></div></div></button>`;
+  }
+  const rest=upcoming.slice(1);
+  const card=t=>`<button class="pc" data-trip="${t.space}/${esc(t.id)}">${coverHTML(t)}<div class="tl">${shareChip(t)}</div><div class="ov"><h4>${esc(t.name)}</h4><div class="row"><span class="chip glass">${esc(rangeText(t))}</span></div></div></button>`;
+  const newCard = S.canWrite ? `<button class="pc newcard" data-new>${ico("plus")}טיול חדש</button>` : "";
+  html+=`<div class="sec"><h3>${rest.length?"עוד טיולים בדרך":"הטיול הבא"}</h3></div><div class="cards">${rest.map(card).join("")}${newCard}</div>`;
+  if(past.length) html+=`<div class="sec"><h3>טיולים שהיו</h3></div><div class="cards">${past.map(card).join("")}</div>`;
+  if(S.isOwner&&S.mcp) html+=`<div style="margin-top:28px;text-align:center"><button class="lnk" data-restore>${driveLogo()}שחזור טיול מגיבוי בדרייב</button></div>`;
+  return html+`</div>`;
+}
+function logoSvg(){ return `<svg width="38" height="38" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#FF5A6E" stroke-width="2.5" stroke-dasharray="4 4"/><path d="M9 27c4-1 5-11 11-11s5 7 11 4" fill="none" stroke="#FFC74A" stroke-width="3" stroke-linecap="round"/><circle cx="9" cy="27" r="3.4" fill="#FFC74A"/><circle cx="31" cy="20" r="3.4" fill="#0B1226" stroke="#3FD6CB" stroke-width="2.5"/></svg>`; }
+function coverArt(t){
+  let s=0; for(const c of (t.id||"x")) s=(s*31+c.charCodeAt(0))>>>0; const r=()=>((s=(s*1103515245+12345)>>>0)/4294967296);
+  const c1=DAYC[Math.floor(r()*7)], c2=DAYC[Math.floor(r()*7)], gid="g"+s;
+  let d="M-10 "+(150+r()*60); for(let i=1;i<=5;i++) d+=` Q${i*70-35} ${60+r()*160} ${i*70+10} ${110+r()*120}`;
+  return `<svg class="art" viewBox="0 0 320 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="${gid}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="#1E2B52"/></linearGradient></defs><rect width="320" height="400" fill="url(#${gid})"/><circle cx="${220+r()*60}" cy="${70+r()*50}" r="44" fill="#F6F1E7" opacity=".85"/><path d="M0 300 Q80 250 160 285 T320 270 V400 H0Z" fill="#0B1226" opacity=".55"/><path d="${d}" fill="none" stroke="${c2}" stroke-width="5" stroke-linecap="round" stroke-dasharray="1 12"/></svg>`;
+}
+
+function renderTrip(){
+  const t=currentTrip(); const app=$("#app");
+  if(!t){ app.innerHTML = S.loaded[S.view.space] ? `<div class="wrap"><div class="topbar"><button class="iconbtn glass" id="back" aria-label="חזרה">${ico("back")}</button></div><div class="empty"><h3>הטיול לא נמצא</h3>ייתכן שהוא נמחק, הועבר, או שלא שותף איתך.</div></div>` : `<div class="loading">טוען…</div>`; const b=$("#back"); if(b) b.onclick=()=>go("home"); return; }
+  if(S.map){ S.map.destroy(); S.map=null; }
+  app.innerHTML = `<header class="thero" id="thero"></header>
+   <div class="wrap">
+    <div class="stats" id="stats"></div>
+    <div class="stamps" id="stamps"></div>
+    <div class="mapbox"><div id="map"></div><div class="daypills" id="daypills"></div><div class="maptools"><button class="iconbtn glass" id="mfit" aria-label="הצג את כל המסלול">${ico("fit")}</button></div><div id="mpop"></div></div>
+    <div class="tabs glass" role="tablist" id="tabs"></div>
+    <div class="panel" id="panel"></div></div>
+   <button class="btn fab" id="fab" hidden></button>`;
+  S.map=new TripMap($("#map"),{onMarker:showPop, onBlank:()=>{ $("#mpop").innerHTML=""; }});
+  $("#mfit").onclick=()=>{ S.dayFilter=null; $("#mpop").innerHTML=""; renderTripBody(); fitTrip(true); };
+  renderTripHead(); renderTripBody();
+}
+function renderTripHead(){
+  const t=currentTrip(); const h=$("#thero"); if(!t||!h) return;
+  const today=todayStr(); const inDays=t.start?dayDiff(today,t.start):null;
+  const when = inDays==null?"": inDays>1?`<span class="chip gold">עוד ${inDays} ימים</span>`: inDays===0?`<span class="chip gold">יוצאים היום!</span>`: inDays===1?`<span class="chip gold">יוצאים מחר!</span>`: (t.end&&t.end>=today)?`<span class="chip gold">בדרכים · יום ${1-inDays}</span>`:"";
+  h.innerHTML=`${coverHTML(t)}<div class="topbar band"><button class="iconbtn glass" id="back" aria-label="חזרה לכל הטיולים">${ico("back")}</button><span class="sp"></span>${shareChip(t)}${S.canWrite?`<button class="iconbtn glass" id="tset" aria-label="הגדרות הטיול">${ico("gear")}</button>`:""}</div>
+    <div class="tt wrap"><div class="row"><span class="chip glass">${esc(rangeText(t))}</span>${when}</div><h1 id="tname">${esc(t.name||"טיול")}</h1>${t.desc?`<div class="desc">${esc(t.desc)}</div>`:""}</div>`;
+  $("#back").onclick=()=>go("home");
+  const ts=$("#tset"); if(ts) ts.onclick=()=>tripSheet(currentTrip());
+}
+function planPoints(){ return plansOf(S.items).filter(i=>i.lat!=null && (!S.dayFilter || i.date===S.dayFilter)); }
+function stopPoints(){ return stopsOf(S.items).filter(s=>s.lat!=null && (!S.dayFilter || s.date===S.dayFilter)); }
+function fitTrip(animate){ if(!S.map) return; const pts=[...stopPoints(),...planPoints()].map(p=>[p.lng,p.lat]); S.map.fit(pts,{animate,padTop:64}); }
+function showPop(p){
+  const box=$("#mpop"); const t=currentTrip(); const c = p.kind==="stop" ? "#FFC74A" : dayColor(t,p.date);
+  const img = p.kind==="stop" ? p.photos?.[0] : p.photo;
+  const n = p.date&&t.start ? dayDiff(t.start,p.date)+1 : null;
+  box.innerHTML=`<div class="mpop ${img?"":"noimg"}" style="--c:${c}">${img?`<img src="${esc(assetSrc(img))}" alt="">`:""}<div class="b"><h4>${esc(p.title||p.place||"")}</h4><div class="tags"><span class="tag t">${p.kind==="stop"?"ביומן":esc(PLAN_TYPES[p.type]||"")}</span>${n>0?`<span class="tag">יום ${n}</span>`:""}</div><div class="acts"><a class="lnk go" href="${gmaps(p.lat,p.lng)}" target="_blank" rel="noopener">${ico("map")}גוגל מפות</a><button class="lnk" id="popgo">לפרטים</button></div></div><button class="x" aria-label="סגור">×</button></div>`;
+  box.querySelector(".x").onclick=e=>{ e.stopPropagation(); box.innerHTML=""; };
+  box.querySelector("#popgo").onclick=()=>{ S.tab = p.kind==="stop"?"journal":"plan"; renderTripBody(); setTimeout(()=>{ const el=document.getElementById("it-"+p.id); if(el) el.scrollIntoView({behavior:"smooth",block:"center"}); },60); };
+}
+function renderTripBody(){
+  const t=currentTrip(); if(!t||!$("#panel")) return;
+  const st=statsOf(t,S.items);
+  const stats=[[st.days||"–","ימים","#FFC74A"],[st.places,"מקומות","#3FD6CB"],[fmtKm(st.km||st.pkm),st.km?"ק״מ שעשינו":"ק״מ במסלול","#FF5A6E"],[st.countries.length,"מדינות","#9B87FF"],[st.photos,"תמונות","#62D98F"]];
+  $("#stats").innerHTML=stats.map(([v,l,c])=>`<div class="stat" style="--c:${c}"><b>${v}</b><span>${l}</span></div>`).join("");
+  $("#stamps").innerHTML=st.countries.map(c=>`<span class="stamp">${esc(c)}</span>`).join("");
+  const dates=[...new Set(plansOf(S.items).concat(stopsOf(S.items)).filter(i=>i.lat!=null).map(i=>i.date).filter(Boolean))].sort();
+  $("#daypills").innerHTML = dates.length>1 ? `<button aria-pressed="${!S.dayFilter}" data-df="">כל הימים</button>`+dates.map(d=>{ const n=t.start?dayDiff(t.start,d)+1:null; return `<button style="--c:${dayColor(t,d)}" aria-pressed="${S.dayFilter===d}" data-df="${d}">${n>0?`יום ${n}`:esc(fmtShort.format(parseD(d)))}</button>`; }).join("") : "";
+  $("#daypills").querySelectorAll("[data-df]").forEach(b=>b.onclick=()=>{ S.dayFilter=b.dataset.df||null; $("#mpop").innerHTML=""; renderTripBody(); fitTrip(true); });
+  S.map.setData(stopPoints(), planPoints(), t);
+  if(S.itemsLoaded && !S.fitted){ S.fitted=true; S.map.animateNext=true; fitTrip(false); }
+  const cnt={plan:st.places, journal:st.stops, docs:S.items.filter(i=>i.kind==="doc").length, check:S.items.filter(i=>i.kind==="check").length};
+  const tabs=[["plan","תכנון"],["journal","יומן"],["docs","מסמכים"],["check","רשימות"]];
+  $("#tabs").innerHTML=tabs.map(([k,l])=>`<button class="tab" role="tab" id="tab-${k}" aria-selected="${S.tab===k}" data-tab="${k}">${l}<span class="n">${cnt[k]||""}</span></button>`).join("");
+  $("#tabs").querySelectorAll(".tab").forEach(b=>b.onclick=()=>{ S.tab=b.dataset.tab; renderTripBody(); });
+  const p=$("#panel");
+  if(!S.itemsLoaded){ p.innerHTML=`<div class="loading">טוען…</div>`; return; }
+  ({journal:renderJournal, plan:renderPlan, docs:renderDocs, check:renderCheck})[S.tab](p,t);
+  const fab=$("#fab"), fl={journal:["רגע לזכור","cam"],plan:["הוסף לתוכנית","plus"],docs:["מסמך חדש","plus"],check:null}[S.tab];
+  fab.hidden=!fl||!S.canWrite; if(fl){ fab.innerHTML=ico(fl[1])+fl[0]; fab.onclick=()=>({journal:()=>stopSheet(null),plan:()=>planSheet(null),docs:()=>docSheet(null)})[S.tab](); }
+}
+function bindCommon(p){
+  p.querySelectorAll("[data-more]").forEach(b=>b.onclick=()=>{ const el=b.previousElementSibling; const o=el.classList.toggle("open"); b.textContent=o?"פחות":"עוד"; });
+  p.querySelectorAll("[data-onmap]").forEach(b=>b.onclick=()=>{ const it=S.items.find(i=>i.id===b.dataset.onmap); $(".mapbox").scrollIntoView({behavior:"smooth",block:"start"}); S.map.centerOn({lng:it.lng,lat:it.lat},2200,true); setTimeout(()=>showPop(it),400); });
+}
+function renderPlan(p,t){
+  const plans=plansOf(S.items), days=S.items.filter(i=>i.kind==="day");
+  if(!plans.length && !days.length){ p.innerHTML=`<div class="empty"><h3>מה בתוכנית?</h3>טיסות, לינות, אתרים ומסעדות, לפי ימים. כל מקום עם מיקום מופיע על המפה בצבע של היום שלו.</div>`; return; }
+  const dates=[...new Set([...plans.map(x=>x.date||""),...days.map(d=>d.date)])].sort((a,b)=>(a||"9").localeCompare(b||"9"));
+  let html="";
+  for(const d of dates){
+    const list=plans.filter(x=>(x.date||"")===d), info=days.find(x=>x.date===d), c=dayColor(t,d);
+    const n=d&&t.start?dayDiff(t.start,d)+1:null, key="d"+d, open=S.open.has(key);
+    html+=`<section class="day" style="--c:${c}"><div class="dhead">${d?`<div class="dn"><b>${n>0?`יום ${n}`:"לפני"}</b><span>${esc(fmtDay.format(parseD(d)))}</span></div>`:`<div class="dn"><b>אולי</b><span>עוד בלי תאריך</span></div>`}${info?.title?`<h3>${esc(info.title)}</h3>`:""}${info?.summary?`<p>${esc(info.summary)}</p>`:""}</div><div class="dbody">`;
+    if(info?.schedule?.length){ html+=`<button class="schedbtn" data-sched="${esc(key)}" aria-expanded="${open}">${ico("chev")}${open?"סגור את סדר היום":"סדר היום שעה אחרי שעה"}</button>${open?`<ol class="sched">${info.schedule.map(s=>`<li><span class="h">${esc(s.t)}</span><span>${esc(s.x)}</span></li>`).join("")}</ol>`:""}`; }
+    list.forEach((x,i)=>{ const tc=TYPE_C[x.type]||TYPE_C.other; const big=i===0&&x.photo;
+      html+=`<article class="place ${x.photo?(big?"big":""):"noimg"} ${x.done?"done":""}" id="it-${esc(x.id)}" style="--c:${tc}">${x.photo?`<button class="ph" data-lbp="${esc(x.id)}" aria-label="הגדל תמונה"><img src="${esc(assetSrc(x.photo))}" alt="" loading="lazy"></button>`:""}
+       <div class="inf"><div class="tags"><span class="tag t">${ico(x.type||"other")}${esc(PLAN_TYPES[x.type]||"אחר")}</span>${x.time?`<span class="tag">${esc(x.time)}</span>`:""}${x.place?`<span class="tag">${esc(x.place)}</span>`:""}${x.rate?`<span class="tag" style="color:var(--gold)">${ico("star")}${esc(x.rate)}</span>`:""}${x.closed?`<span class="tag warn">סגור ב${esc(x.closed)}</span>`:""}${x.done?`<span class="tag" style="color:var(--green)">✓ היינו</span>`:""}</div>
+       <h4>${esc(x.title)}</h4>${x.text?`<p class="clamp">${esc(x.text)}</p>${x.text.length>140?`<button class="more" data-more>עוד</button>`:""}`:""}
+       <div class="acts">${x.lat!=null?`<button class="lnk" data-onmap="${esc(x.id)}">${ico("visit")}על המפה</button><a class="lnk" href="${gmaps(x.lat,x.lng)}" target="_blank" rel="noopener">${ico("map")}גוגל מפות</a>`:""}${S.canWrite?`${x.done?"":`<button class="lnk go" data-arrive="${esc(x.id)}">${ico("cam")}הגעתי</button>`}<button class="lnk" data-edit="${esc(x.id)}">עריכה</button>`:""}</div></div></article>`; });
+    html+=`</div></section>`;
+  }
+  p.innerHTML=html; bindCommon(p);
+  p.querySelectorAll("[data-sched]").forEach(b=>b.onclick=()=>{ const k=b.dataset.sched; S.open.has(k)?S.open.delete(k):S.open.add(k); renderTripBody(); });
+  p.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>planSheet(S.items.find(i=>i.id===b.dataset.edit)));
+  p.querySelectorAll("[data-lbp]").forEach(b=>b.onclick=()=>{ const all=plans.filter(x=>x.photo); lightbox(all.map(x=>({...x.photo,cap:x.title})), all.findIndex(x=>x.id===b.dataset.lbp)); });
+  p.querySelectorAll("[data-arrive]").forEach(b=>b.onclick=()=>{ const x=S.items.find(i=>i.id===b.dataset.arrive); stopSheet(null,{title:x.title,place:x.place,lat:x.lat,lng:x.lng,date:todayStr(),fromPlan:x.id}); });
+}
+function renderJournal(p,t){
+  const stops=stopsOf(S.items);
+  if(!stops.length){ p.innerHTML=`<div class="empty"><h3>היומן מחכה לרגע הראשון</h3>בכל מקום שעוצרים בו: תמונות, כמה מילים והמיקום. תמונה מהטלפון עם מיקום פעיל ממלאת את המקום והשעה לבד, והמסלול נצבע בזהב על המפה.${S.canWrite?`<div style="margin-top:16px"><button class="btn" id="first">${ico("cam")}רגע ראשון</button></div>`:""}</div>`; const f=$("#first"); if(f) f.onclick=()=>stopSheet(null); return; }
+  const groups=new Map(); stops.forEach((s,i)=>{ s._n=i+1; const k=s.date||""; if(!groups.has(k)) groups.set(k,[]); groups.get(k).push(s); });
+  let prev=null, html="";
+  for(const [d,list] of groups){
+    const n=d&&t.start?dayDiff(t.start,d)+1:null;
+    html+=`<div class="jday" style="--c:${dayColor(t,d)}"><div class="jhead"><b>${d?(n>0?`יום ${n}`:"לפני"):"בלי תאריך"}</b>${d?`<span>${esc(fmtDay.format(parseD(d)))}</span>`:""}</div>`;
+    for(const s of list){
+      if(prev&&prev.lat!=null&&s.lat!=null){ const km=hav([prev.lng,prev.lat],[s.lng,s.lat]); if(km>=.5) html+=`<div class="leg"><i></i>${fmtKm(km)} ק״מ</div>`; }
+      const ph=s.photos||[], show=ph.slice(0,3);
+      html+=`<article class="stop" id="it-${esc(s.id)}">${show.length?`<div class="mosaic ${show.length===1?"one":""}">${show.map((a,j)=>`<button data-lb="${esc(s.id)}:${j}" aria-label="הגדל תמונה"><img src="${esc(assetSrc(a))}" alt="" loading="lazy"></button>`).join("")}</div>`:""}
+        <div class="b"><div class="tags">${s.time?`<span class="tag">${esc(s.time)}</span>`:""}${s.place&&s.title?`<span class="tag">${esc(s.place)}</span>`:""}${ph.length>3?`<span class="tag">${ico("cam")}${ph.length} תמונות</span>`:""}</div>
+        <h4>${esc(s.title||s.place||"עצירה")}</h4>${s.text?`<p style="margin:0;white-space:pre-wrap">${esc(s.text)}</p>`:""}
+        <div class="acts">${s.lat!=null?`<button class="lnk" data-onmap="${esc(s.id)}">${ico("visit")}על המפה</button>`:""}${S.canWrite?`<button class="lnk" data-edit="${esc(s.id)}">עריכה</button>`:""}</div></div></article>`;
+      prev=s;
+    }
+    html+=`</div>`;
+  }
+  p.innerHTML=html; bindCommon(p);
+  p.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>stopSheet(S.items.find(i=>i.id===b.dataset.edit)));
+  p.querySelectorAll("[data-lb]").forEach(b=>b.onclick=()=>{ const [id,j]=b.dataset.lb.split(":"); const s=S.items.find(i=>i.id===id); lightbox(s.photos.map(x=>({...x,cap:s.title})),+j); });
+}
+function renderDocs(p,t){
+  const docs=S.items.filter(i=>i.kind==="doc");
+  if(!docs.length){ p.innerHTML=drivePanel(t)+`<div class="empty"><h3>כל הניירת במקום אחד</h3>כרטיסי טיסה, אישורי הזמנה, ביטוח וצילום דרכון. אפשר לצרף PDF או צילום מסך ולשמור את מספר ההזמנה להעתקה בלחיצה.</div>`; bindDrivePanel(p,t); return; }
+  let html=drivePanel(t);
+  for(const [k,[label,c]] of Object.entries(DOC_CATS)){
+    const list=docs.filter(d=>(d.cat||"other")===k).sort(byWhen); if(!list.length) continue;
+    html+=`<div class="dgrp" style="--c:${c}"><h3>${label}</h3>`;
+    for(const d of list){
+      const dd=d.date?parseD(d.date):null;
+      const stub = dd ? `<b>${dd.getDate()}.${dd.getMonth()+1}</b><span>${d.time?esc(d.time):"תאריך"}</span>` : `<b>${ico(k)}</b>`;
+      html+=`<div class="pass" id="it-${esc(d.id)}"><div class="main"><h4>${esc(d.title)}</h4>${d.ref?`<div class="ref"><b>${esc(d.ref)}</b><button data-copy="${esc(d.ref)}">העתק</button></div>`:""}${d.text?`<p style="margin:0;white-space:pre-wrap;color:#d9deef">${esc(d.text)}</p>`:""}
+        ${(d.files||[]).length?`<div class="files">${d.files.map(f=>fileChip(f,d.id)).join("")}</div>`:""}
+        ${S.canWrite?`<div class="acts">${!(d.files||[]).length&&S.assets?`<button class="lnk go" data-edit="${esc(d.id)}">${ico("plus")}צרף קובץ</button>`:""}<button class="lnk" data-edit="${esc(d.id)}">עריכה</button></div>`:""}</div><div class="stub">${stub}</div></div>`;
+    }
+    html+=`</div>`;
+  }
+  p.innerHTML=html; bindDrivePanel(p,t);
+  p.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>docSheet(S.items.find(i=>i.id===b.dataset.edit)));
+  p.querySelectorAll("[data-copy]").forEach(b=>b.onclick=async()=>{ try{ await navigator.clipboard.writeText(b.dataset.copy); toast("הועתק ✓"); }catch(e){ const r=document.createRange(); r.selectNodeContents(b.previousElementSibling); getSelection().removeAllRanges(); getSelection().addRange(r); toast("המספר מסומן – העתק ידנית"); } });
+  p.querySelectorAll("[data-img]").forEach(a=>a.onclick=e=>{ e.preventDefault(); const d=S.items.find(i=>i.id===a.dataset.doc); const imgs=(d.files||[]).filter(f=>f.type?.startsWith("image/")); lightbox(imgs.map(f=>({...f,cap:f.name})), imgs.findIndex(f=>f.id===a.dataset.img)); });
+  function fileChip(f,docId){ return f.type?.startsWith("image/") ? `<a class="file" href="${esc(assetSrc(f))}" data-img="${esc(f.id)}" data-doc="${esc(docId)}"><img src="${esc(assetSrc(f))}" alt=""><span>${esc(f.name||"תמונה")}</span></a>` : `<a class="file" href="${esc(assetSrc(f))}" target="_blank" rel="noopener"><span class="pdf">PDF</span><span>${esc(f.name||"קובץ")}</span></a>${f.drive?`<a class="file" href="${esc(f.drive.url)}" target="_blank" rel="noopener" title="פתח בדרייב">${driveLogo()}</a>`:""}`; }
+}
+function renderCheck(p){
+  const items=S.items.filter(i=>i.kind==="check").sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
+  const base=[["לפני היציאה","#FF5A6E"],["ציוד לארוז","#3FD6CB"]]; const extra=[...new Set(items.map(i=>i.group).filter(g=>g&&!base.some(b=>b[0]===g)))].map((g,i)=>[g,DAYC[(i+2)%7]]);
+  let html="";
+  for(const [g,c] of [...base,...extra]){
+    const list=items.filter(i=>(i.group||"ציוד לארוז")===g), done=list.filter(i=>i.done).length, pct=list.length?done/list.length:0, C=2*Math.PI*24;
+    html+=`<section class="cgrp" style="--c:${c}"><div class="cgh"><svg class="ring" viewBox="0 0 56 56"><circle cx="28" cy="28" r="24" stroke="#ffffff14"/><circle cx="28" cy="28" r="24" stroke="${c}" stroke-dasharray="${(C*pct).toFixed(1)} ${C.toFixed(1)}" stroke-linecap="round" transform="rotate(-90 28 28)"/><text x="28" y="28">${done}/${list.length}</text></svg><h3>${esc(g)}</h3></div>
+      ${list.map(i=>`<div class="check ${i.done?"done":""}"><input type="checkbox" id="ck-${esc(i.id)}" data-ck="${esc(i.id)}" ${i.done?"checked":""} ${S.canWrite?"":"disabled"}><label for="ck-${esc(i.id)}">${esc(i.text)}</label>${S.canWrite?`<button class="x" data-del="${esc(i.id)}" aria-label="מחק">×</button>`:""}</div>`).join("")}
+      ${S.canWrite?`<form class="addrow" data-group="${esc(g)}"><input type="text" id="add-${esc(g.replace(/\s/g,""))}" placeholder="הוסף פריט…" aria-label="פריט חדש"><button class="btn small">הוסף</button></form>`:""}</section>`;
+  }
+  p.innerHTML=html;
+  p.querySelectorAll("[data-ck]").forEach(c=>c.onchange=()=>save(c.dataset.ck,{done:c.checked},true));
+  p.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>removeItem(b.dataset.del));
+  p.querySelectorAll("form.addrow").forEach(f=>f.onsubmit=e=>{ e.preventDefault(); const inp=f.querySelector("input"); const v=inp.value.trim(); if(!v) return; inp.value=""; save(null,{kind:"check",text:v,group:f.dataset.group,done:false}); });
+}
+
+async function save(id, data, merge=false){
+  const t=currentTrip(); if(!t) return null; const col=itemsCol(t.space,t.id);
+  try{
+    if(id && merge){ await col.doc(id).update(data); return id; }
+    const nid=id||uid(); const prev=id?S.items.find(i=>i.id===id):null;
+    const body={...(prev?stripLocal(prev):{}), ...data, updatedAt:Date.now()}; if(!prev) body.createdAt=Date.now();
+    await col.doc(nid).set(body); return nid;
+  }catch(e){ writeError(e); return null; }
+}
+function stripLocal(o){ const c={...o}; delete c.id; delete c._n; return c; }
+async function removeItem(id){ const t=currentTrip(); try{ await itemsCol(t.space,t.id).doc(id).delete(); }catch(e){ writeError(e); } }
+function writeError(e){ if(e?.code==="quota_exceeded") toast("נגמר המקום לשמירה. מחק פריטים ישנים ונסה שוב."); else if(e?.code==="invalid_argument") toast("אין לך הרשאת עריכה בטיול הזה."); else toast("השמירה נכשלה. בדוק חיבור ונסה שוב."); }
+async function compressImage(file,max=2000){
+  try{ const bmp=await createImageBitmap(file,{imageOrientation:"from-image"}); const sc=Math.min(1,max/Math.max(bmp.width,bmp.height));
+    const c=document.createElement("canvas"); c.width=Math.round(bmp.width*sc); c.height=Math.round(bmp.height*sc); c.getContext("2d").drawImage(bmp,0,0,c.width,c.height);
+    const blob=await new Promise(r=>c.toBlob(r,"image/jpeg",.86)); if(blob) return blob; }catch(e){}
+  return file;
+}
+async function uploadFile(file,maxPx){
+  if(!S.assets) throw {code:"no_assets"};
+  const isImg=file.type.startsWith("image/"); const blob=isImg?await compressImage(file,maxPx):file;
+  const type=isImg?(blob.type||file.type):(file.type||"application/pdf");
+  const r=await S.assets.upload(blob,{type}); urlCache.set(r.id,r.url);
+  return {id:r.id,type,name:file.name};
+}
+async function readExif(file){
+  try{ if(!window.exifr) return {}; const g=await exifr.gps(file).catch(()=>null); const m=await exifr.parse(file,["DateTimeOriginal"]).catch(()=>null);
+    const out={}; if(g&&isFinite(g.latitude)){ out.lat=g.latitude; out.lng=g.longitude; }
+    const dt=m?.DateTimeOriginal; if(dt instanceof Date&&!isNaN(dt)){ out.date=ymd(dt); out.time=`${String(dt.getHours()).padStart(2,"0")}:${String(dt.getMinutes()).padStart(2,"0")}`; }
+    return out; }catch(e){ return {}; }
+}
+
+
+/* ---------- Google Drive ---------- */
+const DRIVE="Google Drive", FOLDER_MIME="application/vnd.google-apps.folder", ROOT_NAME="יומן מסעות";
+const qs = s => String(s).replace(/\\/g,"\\\\").replace(/'/g,"\\'");
+function driveErr(e){
+  const c=e?.code;
+  if(c==="server_not_connected"||c==="server_not_found") return "Google Drive לא מחובר. חבר אותו בהגדרות Claude תחת Connectors.";
+  if(c==="needs_reauth") return "החיבור ל-Google Drive פג. חבר אותו מחדש בהגדרות Claude.";
+  if(c==="consent_required"||c==="approval_required"||c==="not_granted") return "לא אושרה גישה לדרייב. לחץ שוב ואשר את הבקשה.";
+  if(c==="too_big") return "הקובץ גדול מדי להעלאה מכאן.";
+  if(c==="no_mcp") return "החיבור לדרייב לא זמין בתצוגה הזאת.";
+  return "הפעולה מול הדרייב נכשלה. נסה שוב.";
+}
+async function dcall(tool,input){ if(!S.mcp) throw {code:"no_mcp"}; const r=await S.mcp.callTool(DRIVE,tool,input,{cache:false}); return r.payload; }
+async function driveInit(){ if(S.driveInit) return; try{ const lt=await S.mcp.listTools(); S.fileArgs=!!lt?.fileArgs; }catch(e){ S.fileArgs=false; } S.driveInit=true; }
+async function findFolder(name,parent){
+  const q=`title = '${qs(name)}' and mimeType = '${FOLDER_MIME}'`+(parent?` and parentId = '${qs(parent)}'`:` and owner = 'me'`);
+  const r=await dcall("search_files",{query:q,excludeContentSnippets:true,pageSize:5}); return r?.files?.[0]||null;
+}
+async function ensureFolder(name,parent){ const f=await findFolder(name,parent); if(f) return f; const inp={title:name,contentMimeType:FOLDER_MIME}; if(parent) inp.parentId=parent; return await dcall("create_file",inp); }
+async function driveRoot(){ if(!S.driveRoot) S.driveRoot=(await ensureFolder(ROOT_NAME)).id; return S.driveRoot; }
+async function tripFolder(t){
+  if(t.drive?.folderId) return t.drive.folderId;
+  const root=await driveRoot(); const name=`${t.name}${t.start?` · ${t.start}`:""}`.replace(/[\/\\]/g,"-");
+  const f=await ensureFolder(name,root);
+  await tripsCol(t.space).doc(t.id).update({drive:{...(t.drive||{}),folderId:f.id,url:f.viewUrl||`https://drive.google.com/drive/folders/${f.id}`}});
+  t.drive={...(t.drive||{}),folderId:f.id,url:f.viewUrl}; return f.id;
+}
+const EXT={"application/pdf":"pdf","image/jpeg":"jpg","image/png":"png","image/webp":"webp","image/heic":"heic","image/gif":"gif"};
+function fileName(base,type){ const ext=EXT[type]||"bin"; let n=String(base||"קובץ").replace(/[\/\\:*?"<>|]/g,"-").slice(0,80).trim()||"קובץ"; if(!n.toLowerCase().endsWith("."+ext)) n=n.replace(/\.[a-z0-9]{2,5}$/i,"")+"."+ext; return n; }
+const blobToB64 = b => new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(String(r.result).split(",")[1]); r.onerror=rej; r.readAsDataURL(b); });
+const b64ToBlob = (b64,type) => { const s=atob(b64), a=new Uint8Array(s.length); for(let i=0;i<s.length;i++) a[i]=s.charCodeAt(i); return new Blob([a],{type}); };
+async function driveUpload(parent,blob,name,type){
+  await driveInit();
+  const inp={title:name,parentId:parent,contentMimeType:type,disableConversionToGoogleType:true};
+  if(S.fileArgs) inp.base64Content={$file:{data:blob,name,type}};
+  else { if(blob.size>700*1024) throw {code:"too_big"}; inp.base64Content=await blobToB64(blob); }
+  const r=await dcall("create_file",inp); return {id:r.id,url:r.viewUrl||`https://drive.google.com/file/d/${r.id}/view`};
+}
+async function assetBlob(a){ const r=await fetch(assetSrc(a)); if(!r.ok) throw {code:"missing"}; return await r.blob(); }
+
+/* Back up one trip: every attached file and photo not yet in Drive, plus a JSON snapshot */
+async function backupTrip(t,{onStep=()=>{},quiet=false,json=true}={}){
+  const folder=await tripFolder(t); let docsF=null, photosF=null, n=0, failed=0;
+  const items=S.items.slice();
+  for(const it of items){
+    let changed=false;
+    const cl=a=>(a||[]).map(x=>({...x})); const lists = it.kind==="doc" ? [["files",cl(it.files)]] : it.kind==="stop" ? [["photos",cl(it.photos)]] : it.kind==="plan"&&it.photo ? [["photo",cl([it.photo])]] : [];
+    for(const [field,arr] of lists){
+      for(let i=0;i<arr.length;i++){ const f=arr[i]; if(f.drive) continue;
+        try{
+          const parent = it.kind==="doc" ? (docsF ||= (await ensureFolder("מסמכים",folder)).id) : (photosF ||= (await ensureFolder("תמונות",folder)).id);
+          onStep(`מעלה ${it.title||"קובץ"}…`);
+          const blob=await assetBlob(f); const type=f.type||blob.type||"image/jpeg";
+          const base = it.kind==="doc" ? (f.name||it.title) : `${it.date||""} ${it.title||"תמונה"}${arr.length>1?` ${i+1}`:""}`;
+          f.drive=await driveUpload(parent,blob,fileName(base,type),type); n++; changed=true;
+        }catch(e){ if(e?.code==="missing") continue; if(["server_not_connected","server_not_found","needs_reauth","consent_required","approval_required","not_granted","no_mcp"].includes(e?.code)) throw e; failed++; }
+      }
+      if(changed){ const data = field==="photo" ? {photo:arr[0]} : {[field]:arr}; try{ await itemsCol(t.space,t.id).doc(it.id).update(data); }catch(e){} }
+    }
+  }
+  if(json){
+    onStep("שומר קובץ גיבוי…");
+    const snap={app:"travel-journal",version:1,savedAt:new Date().toISOString(),trip:stripTrip(t),items:S.items.map(stripLocal).map((x,i)=>({...x,id:S.items[i].id}))};
+    const stamp=new Date().toISOString().slice(0,16).replace("T"," ").replace(":","");
+    await dcall("create_file",{title:`גיבוי – ${t.name} – ${stamp}.json`,parentId:folder,textContent:JSON.stringify(snap),contentMimeType:"application/json",disableConversionToGoogleType:true});
+    await tripsCol(t.space).doc(t.id).update({drive:{...(t.drive||{}),lastBackup:Date.now()}});
+  }
+  return {n,failed};
+}
+function stripTrip(t){ const c={...t}; delete c.id; delete c.space; return c; }
+
+/* Bring a Drive file into the app as an asset */
+async function driveImport(file){
+  const r=await dcall("download_file_content",{fileId:file.id});
+  const b64=r?.content; if(!b64) throw {code:"empty"};
+  const type=r.mimeType||file.mimeType; const blob=b64ToBlob(b64,type);
+  if(!S.assets) throw {code:"no_assets"};
+  const up=await S.assets.upload(blob,{type}); urlCache.set(up.id,up.url);
+  return {id:up.id,type,name:file.title,drive:{id:file.id,url:file.viewUrl||`https://drive.google.com/file/d/${file.id}/view`}};
+}
+async function driveSearch(text,t){
+  const kinds=`(mimeType = 'application/pdf' or mimeType contains 'image/')`;
+  if(text.trim()) return (await dcall("search_files",{query:`title contains '${qs(text.trim())}' and ${kinds}`,excludeContentSnippets:true,pageSize:20}))?.files||[];
+  const out=[];
+  if(t?.drive?.folderId){ try{ const sub=await findFolder("מסמכים",t.drive.folderId); if(sub){ const r=await dcall("search_files",{query:`parentId = '${qs(sub.id)}' and ${kinds}`,excludeContentSnippets:true,pageSize:30}); out.push(...(r?.files||[])); } }catch(e){} }
+  const r=await dcall("search_files",{query:`owner = 'me' and ${kinds}`,excludeContentSnippets:true,pageSize:15});
+  for(const f of (r?.files||[])) if(!out.some(o=>o.id===f.id)) out.push(f);
+  return out;
+}
+function drivePicker(root,onPick){
+  const box=root.querySelector("#dpick"); const t=currentTrip();
+  box.innerHTML=`<div class="dpick"><input type="text" id="dq" placeholder="חיפוש קובץ בדרייב לפי שם" aria-label="חיפוש בדרייב"><div class="dlist" id="dl"><div class="muted">טוען מהדרייב…</div></div></div>`;
+  const list=box.querySelector("#dl"); let timer;
+  const run=async q=>{ list.innerHTML=`<div class="muted">מחפש…</div>`; try{ const fs=await driveSearch(q,t);
+      list.innerHTML = fs.length ? fs.map((f,i)=>`<button type="button" class="drow" data-i="${i}"><span class="pdf">${f.mimeType==="application/pdf"?"PDF":"IMG"}</span><span class="nm">${esc(f.title)}</span><span class="muted mono">${f.fileSize?Math.max(1,Math.round(f.fileSize/1024))+"KB":""}</span></button>`).join("") : `<div class="muted">לא נמצאו קבצי PDF או תמונות.</div>`;
+      list.querySelectorAll(".drow").forEach(b=>b.onclick=async()=>{ const f=fs[+b.dataset.i]; b.disabled=true; b.querySelector(".nm").textContent="מוריד…"; try{ onPick(await driveImport(f)); toast("נוסף מהדרייב ✓"); b.remove(); }catch(e){ toast(e?.code==="empty"?"לא הצלחתי להוריד את הקובץ":driveErr(e)); b.disabled=false; b.querySelector(".nm").textContent=f.title; } });
+    }catch(e){ list.innerHTML=`<div class="muted">${esc(driveErr(e))}</div>`; } };
+  box.querySelector("#dq").oninput=e=>{ clearTimeout(timer); timer=setTimeout(()=>run(e.target.value),450); };
+  run("");
+}
+function drivePanel(t){
+  if(!S.isOwner||!S.mcp) return "";
+  const d=t.drive||{}; const files=S.items.reduce((n,i)=>n+[...(i.files||[]),...(i.photos||[]),...(i.photo?[i.photo]:[])].filter(f=>f.drive).length,0);
+  const total=S.items.reduce((n,i)=>n+[...(i.files||[]),...(i.photos||[]),...(i.photo?[i.photo]:[])].length,0);
+  const last=d.lastBackup?new Intl.DateTimeFormat("he-IL",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}).format(new Date(d.lastBackup)):null;
+  return `<section class="drive"><div class="dh">${driveLogo()}<div style="flex:1;min-width:0"><b>Google Drive</b><div class="muted" style="font-size:.85rem">${last?`גיבוי אחרון: ${esc(last)} · ${files}/${total} קבצים בדרייב`:"הטיול עוד לא גובה לדרייב"}</div></div></div>
+    <div class="acts"><button class="lnk go" id="dbak" style="--c:var(--gold)">${ico("up")}גבה עכשיו</button>${d.url?`<a class="lnk" href="${esc(d.url)}" target="_blank" rel="noopener">${ico("map")}פתח בדרייב</a>`:""}</div>
+    <label class="switch" style="padding:8px 12px;margin-top:8px"><input type="checkbox" id="dauto" ${d.auto?"checked":""}><span style="font-size:.9rem">להעלות לדרייב אוטומטית כל קובץ חדש שמצרפים</span></label>
+    <div class="muted" id="dstat" style="font-size:.85rem"></div></section>`;
+}
+function bindDrivePanel(p,t){
+  const b=p.querySelector("#dbak"); if(!b) return;
+  b.onclick=async()=>{ b.disabled=true; const st=p.querySelector("#dstat");
+    try{ const r=await backupTrip(t,{onStep:m=>st.textContent=m}); st.textContent=""; toast(r.failed?`גובה, אבל ${r.failed} קבצים נכשלו`:`הגיבוי נשמר בדרייב ✓ (${r.n} קבצים חדשים)`); }
+    catch(e){ st.textContent=driveErr(e); } b.disabled=false; };
+  p.querySelector("#dauto").onchange=async e=>{ try{ await tripsCol(t.space).doc(t.id).update({drive:{...(t.drive||{}),auto:e.target.checked}}); }catch(err){ writeError(err); } };
+}
+async function autoDrive(){ const t=currentTrip(); if(!t||!S.isOwner||!S.mcp||!t.drive?.auto) return; try{ const r=await backupTrip(t,{json:false}); if(r.n) toast(`הועלו ${r.n} קבצים לדרייב ✓`); }catch(e){ toast(driveErr(e)); } }
+async function restoreFromDrive(){
+  openSheet(`<h2>שחזור מהדרייב</h2><p class="muted" style="margin:0">בחר קובץ גיבוי. הטיול ישוחזר כטיול חדש ופרטי, והקבצים שגובו יורדו מהדרייב.</p><div class="dlist" id="rl"><div class="muted">מחפש גיבויים…</div></div><div class="muted" id="rst"></div><div class="sheet-actions"><button class="btn ghost" id="rc">סגור</button></div>`, async root=>{
+    root.querySelector("#rc").onclick=closeSheet; const list=root.querySelector("#rl"), st=root.querySelector("#rst");
+    try{ const r=await dcall("search_files",{query:`title contains 'גיבוי' and mimeType = 'application/json'`,excludeContentSnippets:true,pageSize:30});
+      const fs=(r?.files||[]).sort((a,b)=>(b.modifiedTime||"").localeCompare(a.modifiedTime||""));
+      list.innerHTML = fs.length ? fs.map((f,i)=>`<button type="button" class="drow" data-i="${i}"><span class="pdf" style="background:var(--teal);color:#0b1226">JSON</span><span class="nm">${esc(f.title.replace(/\.json$/,""))}</span></button>`).join("") : `<div class="muted">לא נמצאו קבצי גיבוי בדרייב.</div>`;
+      list.querySelectorAll(".drow").forEach(b=>b.onclick=async()=>{ list.querySelectorAll("button").forEach(x=>x.disabled=true);
+        try{ const id=await restoreFile(fs[+b.dataset.i],m=>st.textContent=m); closeSheet(); toast("הטיול שוחזר ✓"); go("trip","private",id); }
+        catch(e){ st.textContent=e?.code==="bad_backup"?"הקובץ הזה לא נראה כמו גיבוי של היומן.":driveErr(e); list.querySelectorAll("button").forEach(x=>x.disabled=false); } });
+    }catch(e){ list.innerHTML=`<div class="muted">${esc(driveErr(e))}</div>`; }
+  });
+}
+async function restoreFile(file,onStep){
+  onStep("מוריד את הגיבוי…");
+  const r=await dcall("download_file_content",{fileId:file.id});
+  let snap; try{ const bytes=b64ToBlob(r.content,"application/json"); snap=JSON.parse(await bytes.text()); }catch(e){ throw {code:"bad_backup"}; }
+  if(snap?.app!=="travel-journal"||!snap.trip) throw {code:"bad_backup"};
+  const id=uid(); const col=itemsCol("private",id);
+  const fix=async f=>{ try{ const h=await fetch(assetSrc(f),{method:"HEAD"}); if(h.ok) return f; }catch(e){} if(!f.drive?.id) return null; onStep(`מוריד ${f.name||"קובץ"} מהדרייב…`); const n=await driveImport({id:f.drive.id,title:f.name||"קובץ",mimeType:f.type}); return {...f,id:n.id}; };
+  for(const it of snap.items||[]){
+    const x={...it}; delete x.id; onStep(`משחזר: ${x.title||x.text||""}`);
+    if(x.files) x.files=(await Promise.all(x.files.map(fix))).filter(Boolean);
+    if(x.photos) x.photos=(await Promise.all(x.photos.map(fix))).filter(Boolean);
+    if(x.photo) x.photo=await fix(x.photo);
+    await col.doc(it.id||uid()).set(x);
+  }
+  const trip={...snap.trip}; if(trip.cover) trip.cover=await fix(trip.cover);
+  await tripsCol("private").doc(id).set({...trip,name:trip.name+" (משוחזר)",createdAt:Date.now()});
+  return id;
+}
+function driveLogo(){ return `<svg width="34" height="30" viewBox="0 0 87 78" aria-hidden="true"><path d="M6.6 66.9l3.9 6.7c.8 1.4 2 2.5 3.3 3.3L27.5 53H0c0 1.6.4 3.1 1.2 4.5z" fill="#0066da"/><path d="M43.7 25L30 1.2c-1.4.8-2.5 1.9-3.3 3.3L1.2 48.5C.4 49.9 0 51.4 0 53h27.5z" fill="#00ac47"/><path d="M73.6 76.9c1.4-.8 2.5-1.9 3.3-3.3l1.6-2.7 7.6-13.2c.8-1.4 1.2-2.9 1.2-4.5H59.8l5.9 11.5z" fill="#ea4335"/><path d="M43.7 25L57.4 1.2C56 .4 54.5 0 52.9 0H34.4c-1.6 0-3.1.5-4.5 1.2z" fill="#00832d"/><path d="M59.8 53H27.5L13.8 76.9c1.4.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.1-.5 4.5-1.2z" fill="#2684fc"/><path d="M73.4 26.5L60.7 4.5c-.8-1.4-2-2.5-3.3-3.3L43.7 25l16.1 28h27.4c0-1.6-.4-3.1-1.2-4.5z" fill="#ffba00"/></svg>`; }
+
+let sheetMap=null;
+function openSheet(html,onMount){
+  closeSheet(); const scrim=document.createElement("div"); scrim.className="scrim"; scrim.id="scrim";
+  scrim.innerHTML=`<div class="sheet" role="dialog" aria-modal="true">${html}</div>`; document.body.append(scrim);
+  scrim.addEventListener("click",e=>{ if(e.target===scrim) closeSheet(); }); document.addEventListener("keydown",escClose);
+  onMount(scrim.querySelector(".sheet"));
+}
+function escClose(e){ if(e.key==="Escape") closeSheet(); }
+function closeSheet(){ const s=$("#scrim"); if(s) s.remove(); if(sheetMap){ sheetMap.destroy(); sheetMap=null; } document.removeEventListener("keydown",escClose); }
+function confirmBtn(btn,label,fn){ let armed=false; btn.dataset.label=btn.textContent; btn.onclick=()=>{ if(!armed){ armed=true; btn.textContent=label; setTimeout(()=>{ armed=false; btn.textContent=btn.dataset.label; },3500); return; } fn(); }; }
+function locationField(init){
+  return `<div class="f"><span>מיקום</span>
+    <input type="text" id="psearch" placeholder="חיפוש עיר באנגלית, למשל Krakow" dir="ltr" aria-label="חיפוש עיר"><div class="results" id="presults"></div>
+    <div class="picker"><div id="pmap"></div><svg class="pin" viewBox="0 0 24 24">${ICONS.pin}</svg><span class="coord mono glass" id="pcoord">—</span></div>
+    <small>הזז את המפה כך שהסיכה על המקום המדויק, או הדבק קישור מגוגל מפות / קואורדינטות:</small>
+    <div class="addrow" style="margin:0"><input type="text" id="ppaste" placeholder="52.70, 23.87 או קישור" dir="ltr"><button type="button" class="btn ghost small" id="pgo">הצב</button></div>
+    <label class="switch" style="padding:8px 12px"><input type="checkbox" id="pnone" ${init.lat==null?"checked":""}> בלי מיקום</label></div>`;
+}
+function mountLocation(root,init,state){
+  sheetMap=new TripMap(root.querySelector("#pmap"),{onMove:c=>{ if(c){ state.lat=+c.lat.toFixed(6); state.lng=+c.lng.toFixed(6); root.querySelector("#pcoord").textContent=`${state.lat.toFixed(5)}, ${state.lng.toFixed(5)}`; if(!state.silent) root.querySelector("#pnone").checked=false; } }});
+  sheetMap.setData(stopsOf(S.items).filter(s=>s.lat!=null), plansOf(S.items).filter(s=>s.lat!=null), currentTrip());
+  const ref = init.lat!=null ? {lng:init.lng,lat:init.lat} : (()=>{ const l=stopsOf(S.items).filter(s=>s.lat!=null).pop()||plansOf(S.items).find(s=>s.lat!=null); return l?{lng:l.lng,lat:l.lat}:null; })();
+  state.silent=true; if(ref) sheetMap.centerOn(ref, init.lat!=null?3000:700, false); else sheetMap.fit([],{animate:false}); setTimeout(()=>{ state.silent=false; },300);
+  state.place=ll=>{ state.silent=false; sheetMap.centerOn(ll,3000,true); root.querySelector("#pnone").checked=false; };
+  const ps=root.querySelector("#psearch"), pr=root.querySelector("#presults");
+  ps.oninput=()=>{ const r=searchPlaces(ps.value); pr.innerHTML=r.map((p,i)=>`<button type="button" data-i="${i}">${esc(p[0])} <span class="muted">${esc(p[1])}</span></button>`).join(""); pr.querySelectorAll("button").forEach(b=>b.onclick=()=>{ const p=r[+b.dataset.i]; state.place({lat:p[2],lng:p[3]}); pr.innerHTML=""; ps.value=p[0]; const pl=root.querySelector("#splace,#pplace"); if(pl&&!pl.value) pl.value=p[0]; }); };
+  root.querySelector("#pgo").onclick=()=>{ const c=parseCoords(root.querySelector("#ppaste").value); if(!c){ toast("לא זיהיתי מיקום. קישור מקוצר לא נתמך – העתק את הקישור המלא"); return; } state.place(c); };
+}
+const locValue=(root,state)=>root.querySelector("#pnone").checked?{lat:null,lng:null}:{lat:state.lat,lng:state.lng};
+const actions=(isNew,delLabel)=>`<div class="sheet-actions"><div style="display:flex;gap:8px"><button class="btn" id="ssave">שמור</button><button class="btn ghost" id="scancel">ביטול</button></div>${isNew?"":`<button class="btn danger small" id="sdel">${delLabel}</button>`}</div>`;
+
+function stopSheet(item,preset={}){
+  const it=item||preset, isNew=!item, photos=[...(item?.photos||[])], pending=[], loc={};
+  openSheet(`<h2>${isNew?"רגע לזכור":"עריכת עצירה"}</h2>
+    <div class="f"><span>תמונות</span><div class="thumbs" id="thumbs"></div>
+      ${S.assets?`<label class="filebtn">${ico("cam")}הוסף תמונות<input type="file" id="pfiles" accept="image/*" multiple></label><small id="exifnote">המיקום והשעה נלקחים מהתמונה כשהם שמורים בה.</small>`:`<small>העלאת תמונות דורשת הרשאת עריכה באפליקציה.</small>`}</div>
+    <label class="f"><span>כותרת</span><input type="text" id="stitle" value="${esc(it.title||"")}" placeholder="למשל: העיטם הראשון"></label>
+    <label class="f"><span>מקום</span><input type="text" id="splace" value="${esc(it.place||"")}" placeholder="עיר, אתר או אזור"></label>
+    <div class="grid2"><label class="f"><span>תאריך</span><input type="date" id="sdate" value="${esc(it.date||todayStr())}"></label><label class="f"><span>שעה</span><input type="time" id="stime" value="${esc(it.time||"")}"></label></div>
+    <label class="f"><span>מה קרה כאן</span><textarea id="stext" placeholder="כמה מילים לזיכרון…">${esc(it.text||"")}</textarea></label>
+    ${locationField(it)}${actions(isNew,"מחק עצירה")}`, root=>{
+    mountLocation(root,it,loc);
+    const drawThumbs=()=>{ root.querySelector("#thumbs").innerHTML=[...photos.map((a,i)=>`<div class="thumb"><img src="${esc(assetSrc(a))}" alt=""><button type="button" data-rm="o${i}" aria-label="הסר">×</button></div>`),...pending.map((p,i)=>`<div class="thumb"><img src="${p.url}" alt=""><button type="button" data-rm="p${i}" aria-label="הסר">×</button></div>`)].join("");
+      root.querySelectorAll("[data-rm]").forEach(b=>b.onclick=()=>{ const k=b.dataset.rm; if(k[0]==="o") photos.splice(+k.slice(1),1); else { URL.revokeObjectURL(pending[+k.slice(1)].url); pending.splice(+k.slice(1),1); } drawThumbs(); }); };
+    drawThumbs();
+    const fi=root.querySelector("#pfiles");
+    if(fi) fi.onchange=async()=>{ const files=[...fi.files]; fi.value=""; let got=false;
+      files.forEach(f=>pending.push({file:f,url:URL.createObjectURL(f)})); drawThumbs();
+      for(const f of files){ const ex=await readExif(f);
+        if(ex.lat!=null&&!got&&it.lat==null&&!loc.byExif){ loc.place({lat:ex.lat,lng:ex.lng}); loc.byExif=true; got=true; }
+        if(ex.date&&isNew&&!loc.dateSet){ root.querySelector("#sdate").value=ex.date; if(ex.time) root.querySelector("#stime").value=ex.time; loc.dateSet=true; } }
+      const n=root.querySelector("#exifnote"); if(n) n.textContent=got?"המיקום נלקח מהתמונה ✓ אפשר לדייק על המפה.":"לא נמצא מיקום בתמונה – סמן אותו על המפה."; };
+    root.querySelector("#scancel").onclick=closeSheet;
+    const del=root.querySelector("#sdel"); if(del) confirmBtn(del,"לחץ שוב למחיקה",async()=>{ await removeItem(item.id); closeSheet(); toast("העצירה נמחקה"); });
+    root.querySelector("#ssave").onclick=async e=>{ const b=e.currentTarget; b.disabled=true;
+      try{ for(let i=0;i<pending.length;i++){ b.textContent=`מעלה ${i+1}/${pending.length}…`; photos.push(await uploadFile(pending[i].file,2000)); } }
+      catch(err){ b.disabled=false; b.textContent="שמור"; toast(err?.code==="no_assets"?"אין הרשאה להעלות קבצים":"העלאת תמונה נכשלה. נסה שוב."); return; }
+      b.textContent="שומר…";
+      const data={kind:"stop",title:root.querySelector("#stitle").value.trim(),place:root.querySelector("#splace").value.trim(),date:root.querySelector("#sdate").value,time:root.querySelector("#stime").value,text:root.querySelector("#stext").value.trim(),photos:photos.map(p=>({id:p.id,type:p.type||"image/jpeg"})),...locValue(root,loc)};
+      const id=await save(item?.id||null,data);
+      if(id&&preset.fromPlan) await save(preset.fromPlan,{done:true},true);
+      if(id){ closeSheet(); toast(isNew?"נוסף ליומן ✓":"נשמר ✓"); if(pending.length) setTimeout(autoDrive,600); if(preset.fromPlan){ S.tab="journal"; renderTripBody(); } } else { b.disabled=false; b.textContent="שמור"; } };
+  });
+}
+function planSheet(item){
+  const it=item||{}, loc={}, t=currentTrip(), cur=it.type||"visit"; let photo=it.photo||null, newPhoto=null;
+  openSheet(`<h2>${item?"עריכה":"מה בתוכנית?"}</h2>
+    <div class="f"><span>סוג</span><div class="typegrid">${Object.entries(PLAN_TYPES).map(([k,v])=>`<label style="--c:${TYPE_C[k]}"><input type="radio" name="ptype" value="${k}" ${cur===k?"checked":""}><span>${ico(k)}${v}</span></label>`).join("")}</div></div>
+    <label class="f"><span>מה</span><input type="text" id="ptitle" value="${esc(it.title||"")}" placeholder="למשל: מחנה מיידנק"></label>
+    <div class="grid2"><label class="f"><span>יום</span><input type="date" id="pdate" value="${esc(it.date||t?.start||"")}"></label><label class="f"><span>שעה</span><input type="time" id="ptime" value="${esc(it.time||"")}"></label></div>
+    <label class="f"><span>עיר / אזור</span><input type="text" id="pplace" value="${esc(it.place||"")}"></label>
+    <label class="f"><span>על המקום</span><textarea id="ptext">${esc(it.text||"")}</textarea></label>
+    <div class="f"><span>תמונה</span><div class="thumbs" id="pph"></div>${S.assets?`<label class="filebtn">${ico("cam")}בחר תמונה<input type="file" id="pphf" accept="image/*"></label>`:""}</div>
+    ${locationField(it)}
+    ${item?`<label class="switch"><input type="checkbox" id="pdone" ${it.done?"checked":""}> היינו כאן</label>`:""}
+    ${actions(!item,"מחק")}`, root=>{
+    mountLocation(root,it,loc);
+    const draw=()=>{ const src=newPhoto?newPhoto.url:(photo?assetSrc(photo):null); root.querySelector("#pph").innerHTML=src?`<div class="thumb" style="width:120px"><img src="${esc(src)}" alt=""><button type="button" id="pphrm" aria-label="הסר">×</button></div>`:""; const r=root.querySelector("#pphrm"); if(r) r.onclick=()=>{ photo=null; newPhoto=null; draw(); }; };
+    draw(); const pf=root.querySelector("#pphf"); if(pf) pf.onchange=()=>{ const f=pf.files[0]; if(f){ newPhoto={file:f,url:URL.createObjectURL(f)}; draw(); } pf.value=""; };
+    root.querySelector("#scancel").onclick=closeSheet;
+    const del=root.querySelector("#sdel"); if(del) confirmBtn(del,"לחץ שוב למחיקה",async()=>{ await removeItem(item.id); closeSheet(); });
+    root.querySelector("#ssave").onclick=async e=>{ const title=root.querySelector("#ptitle").value.trim(); if(!title){ toast("כתוב מה מתוכנן"); return; } const b=e.currentTarget; b.disabled=true;
+      try{ if(newPhoto){ b.textContent="מעלה…"; photo=await uploadFile(newPhoto.file,1800); } }catch(err){ toast("העלאת התמונה נכשלה"); }
+      const data={kind:"plan",type:root.querySelector("input[name=ptype]:checked")?.value||"visit",title,date:root.querySelector("#pdate").value,time:root.querySelector("#ptime").value,place:root.querySelector("#pplace").value.trim(),text:root.querySelector("#ptext").value.trim(),done:root.querySelector("#pdone")?.checked||false,photo:photo?{id:photo.id,type:photo.type||"image/jpeg"}:null,...locValue(root,loc)};
+      if(await save(item?.id||null,data)) closeSheet(); else { b.disabled=false; b.textContent="שמור"; } };
+  });
+}
+function docSheet(item){
+  const it=item||{}, files=[...(it.files||[])], pending=[];
+  openSheet(`<h2>${item?"עריכת מסמך":"מסמך חדש"}</h2>
+    <div class="f"><span>קטגוריה</span><div class="typegrid">${Object.entries(DOC_CATS).map(([k,[v,c]])=>`<label style="--c:${c}"><input type="radio" name="dcat" value="${k}" ${(it.cat||"flight")===k?"checked":""}><span>${ico(k)}${v}</span></label>`).join("")}</div></div>
+    <label class="f"><span>שם המסמך</span><input type="text" id="dtitle" value="${esc(it.title||"")}" placeholder="טיסה הלוך TLV → WAW"></label>
+    <label class="f"><span>מספר הזמנה / אסמכתא</span><input type="text" id="dref" dir="ltr" value="${esc(it.ref||"")}" placeholder="ABC123"></label>
+    <div class="grid2"><label class="f"><span>תאריך</span><input type="date" id="ddate" value="${esc(it.date||"")}"></label><label class="f"><span>שעה</span><input type="time" id="dtime" value="${esc(it.time||"")}"></label></div>
+    <label class="f"><span>פרטים</span><textarea id="dtext" placeholder="כתובת, טלפון, שעת צ׳ק-אין…">${esc(it.text||"")}</textarea></label>
+    <div class="f"><span>קבצים</span><div class="files" id="dfiles"></div>${S.assets?`<label class="filebtn">${ico("plus")}צרף מהטלפון<input type="file" id="dfin" accept="application/pdf,image/*" multiple></label>${S.mcp&&S.isOwner?`<button type="button" class="filebtn" id="dfdrive" style="color:var(--sky);border-color:#56b2ff66">${driveLogo()}הוסף מהדרייב</button>`:""}<div id="dpick"></div><small>עד 20MB לקובץ.</small>`:`<small>העלאת קבצים דורשת הרשאת עריכה באפליקציה.</small>`}</div>
+    ${actions(!item,"מחק מסמך")}`, root=>{
+    const draw=()=>{ root.querySelector("#dfiles").innerHTML=[...files.map((f,i)=>`<span class="file"><span class="pdf">${f.type?.startsWith("image/")?"IMG":"PDF"}</span><span>${esc(f.name||"קובץ")}</span><button type="button" data-rm="o${i}" aria-label="הסר" style="border:0;background:none;color:var(--muted)">×</button></span>`),...pending.map((f,i)=>`<span class="file"><span class="pdf" style="background:var(--gold);color:var(--on-gold)">חדש</span><span>${esc(f.name)}</span><button type="button" data-rm="p${i}" aria-label="הסר" style="border:0;background:none;color:var(--muted)">×</button></span>`)].join("");
+      root.querySelectorAll("[data-rm]").forEach(b=>b.onclick=()=>{ const k=b.dataset.rm; (k[0]==="o"?files:pending).splice(+k.slice(1),1); draw(); }); };
+    draw();
+    const dfd=root.querySelector("#dfdrive"); if(dfd) dfd.onclick=()=>{ dfd.hidden=true; drivePicker(root,f=>{ files.push(f); draw(); }); };
+    const fi=root.querySelector("#dfin"); if(fi) fi.onchange=()=>{ for(const f of fi.files){ if(f.size>20*1024*1024){ toast(`${f.name} גדול מ-20MB`); continue; } pending.push(f); } fi.value=""; draw(); };
+    root.querySelector("#scancel").onclick=closeSheet;
+    const del=root.querySelector("#sdel"); if(del) confirmBtn(del,"לחץ שוב למחיקה",async()=>{ await removeItem(item.id); closeSheet(); });
+    root.querySelector("#ssave").onclick=async e=>{ const title=root.querySelector("#dtitle").value.trim(); if(!title){ toast("תן שם למסמך"); return; } const b=e.currentTarget; b.disabled=true;
+      try{ for(let i=0;i<pending.length;i++){ b.textContent=`מעלה ${i+1}/${pending.length}…`; files.push(await uploadFile(pending[i],2800)); } }catch(err){ b.disabled=false; b.textContent="שמור"; toast("העלאת הקובץ נכשלה"); return; }
+      const data={kind:"doc",cat:root.querySelector("input[name=dcat]:checked")?.value||"other",title,ref:root.querySelector("#dref").value.trim(),date:root.querySelector("#ddate").value,time:root.querySelector("#dtime").value,text:root.querySelector("#dtext").value.trim(),files};
+      if(await save(item?.id||null,data)){ closeSheet(); if(pending.length) setTimeout(autoDrive,600); } else { b.disabled=false; b.textContent="שמור"; } };
+  });
+}
+function tripSheet(trip){
+  const t=trip||{}; let cover=t.cover||null, coverFile=null;
+  const ownerCtl = S.isOwner ? `<label class="switch"><input type="checkbox" id="tshare" ${t.space==="shared"?"checked":""}><div><b>משותף</b><div class="muted" style="font-size:.85rem">כבוי: פרטי, רק אתה רואה. דלוק: גלוי וניתן לעריכה גם למי שהזמנת לאפליקציה.</div></div></label>` : "";
+  openSheet(`<h2>${trip?"הגדרות הטיול":"טיול חדש"}</h2>
+    <label class="f"><span>שם הטיול</span><input type="text" id="tn" value="${esc(t.name||"")}" placeholder="למשל: טנזניה – ספארי וזנזיבר"></label>
+    <div class="grid2"><label class="f"><span>יציאה</span><input type="date" id="ts" value="${esc(t.start||"")}"></label><label class="f"><span>חזרה</span><input type="date" id="te" value="${esc(t.end||"")}"></label></div>
+    <label class="f"><span>משפט על הטיול</span><input type="text" id="td" value="${esc(t.desc||"")}"></label>
+    <div class="f"><span>תמונת שער</span><div class="thumbs" id="tcov"></div>${S.assets?`<label class="filebtn">${ico("cam")}בחר תמונה<input type="file" id="tcf" accept="image/*"></label>`:""}</div>
+    ${ownerCtl}
+    <div class="sheet-actions"><div style="display:flex;gap:8px"><button class="btn" id="tsave">${trip?"שמור":"צור טיול"}</button><button class="btn ghost" id="tcancel">ביטול</button></div>${trip&&(S.isOwner||t.space==="shared")?`<button class="btn danger small" id="tdel">מחק טיול</button>`:""}</div>`, root=>{
+    const draw=()=>{ const src=coverFile?coverFile.url:(cover?assetSrc(cover):null); root.querySelector("#tcov").innerHTML=src?`<div class="thumb" style="width:140px"><img src="${esc(src)}" alt=""><button type="button" id="tcrm" aria-label="הסר">×</button></div>`:""; const r=root.querySelector("#tcrm"); if(r) r.onclick=()=>{ cover=null; coverFile=null; draw(); }; };
+    draw(); const cf=root.querySelector("#tcf"); if(cf) cf.onchange=()=>{ const f=cf.files[0]; if(f){ coverFile={file:f,url:URL.createObjectURL(f)}; draw(); } cf.value=""; };
+    root.querySelector("#tcancel").onclick=closeSheet;
+    const del=root.querySelector("#tdel"); if(del) confirmBtn(del,"לחץ שוב – כל תוכן הטיול יימחק",async()=>{ try{ await deleteTrip(trip); closeSheet(); go("home"); toast("הטיול נמחק"); }catch(e){ writeError(e); } });
+    root.querySelector("#tsave").onclick=async e=>{
+      const name=root.querySelector("#tn").value.trim(); if(!name){ toast("תן שם לטיול"); return; }
+      const start=root.querySelector("#ts").value, end=root.querySelector("#te").value; if(start&&end&&end<start){ toast("תאריך החזרה לפני היציאה"); return; }
+      const b=e.currentTarget; b.disabled=true; b.textContent="שומר…";
+      try{ if(coverFile) cover=await uploadFile(coverFile.file,1800); }catch(err){ toast("העלאת התמונה נכשלה"); }
+      const data={name,start,end,desc:root.querySelector("#td").value.trim(),cover:cover?{id:cover.id,type:cover.type||"image/jpeg"}:null,updatedAt:Date.now()};
+      const want = S.isOwner ? (root.querySelector("#tshare").checked?"shared":"private") : "shared";
+      try{
+        if(!trip){ const id=uid(); await tripsCol(want).doc(id).set({...data,createdAt:Date.now()}); closeSheet(); go("trip",want,id); return; }
+        await tripsCol(trip.space).doc(trip.id).update(data);
+        if(want!==trip.space){ b.textContent=want==="shared"?"משתף…":"הופך לפרטי…"; await moveTrip(trip,want); closeSheet(); toast(want==="shared"?"הטיול משותף עכשיו ✓":"הטיול פרטי עכשיו ✓"); return; }
+        closeSheet(); toast("נשמר ✓");
+      }catch(err){ writeError(err); b.disabled=false; b.textContent="שמור"; }
+    };
+  });
+}
+async function moveTrip(trip,to){
+  S.moving=true;
+  try{ const from=trip.space, snap=await itemsCol(from,trip.id).get(), tdoc=await tripsCol(from).doc(trip.id).get();
+    for(const d of snap.docs) await itemsCol(to,trip.id).doc(d.id).set(d.data());
+    await tripsCol(to).doc(trip.id).set({...tdoc.data()});
+    for(const d of snap.docs) await itemsCol(from,trip.id).doc(d.id).delete();
+    await tripsCol(from).doc(trip.id).delete();
+    closeItems(); location.hash=`#t-${to}-${trip.id}`;
+  } finally { S.moving=false; }
+}
+async function deleteTrip(trip){ const snap=await itemsCol(trip.space,trip.id).get(); for(const d of snap.docs) await itemsCol(trip.space,trip.id).doc(d.id).delete(); await tripsCol(trip.space).doc(trip.id).delete(); }
+
+function lightbox(list,i){
+  if(!list?.length) return; let k=Math.max(0,i);
+  const el=document.createElement("div"); el.className="lightbox"; el.setAttribute("role","dialog");
+  const draw=()=>{ el.innerHTML=`<img src="${esc(assetSrc(list[k]))}" alt=""><button class="lb" style="top:calc(14px + env(safe-area-inset-top,0px));left:14px" data-a="x" aria-label="סגור">×</button>${list.length>1?`<button class="lb" style="right:10px;top:50%" data-a="n" aria-label="הקודמת">›</button><button class="lb" style="left:10px;top:50%" data-a="p" aria-label="הבאה">‹</button>`:""}<div class="cap">${esc(list[k].cap||"")} ${list.length>1?`<span class="mono">${k+1}/${list.length}</span>`:""}</div>`; };
+  draw(); document.body.append(el);
+  const step=dx=>{ k=(k+dx+list.length)%list.length; draw(); };
+  const key=e=>{ if(e.key==="Escape") close(); if(e.key==="ArrowLeft") step(1); if(e.key==="ArrowRight") step(-1); };
+  const close=()=>{ el.remove(); document.removeEventListener("keydown",key); };
+  el.onclick=e=>{ const a=e.target.dataset.a; if(a==="x"||e.target===el) close(); else if(a==="p") step(1); else if(a==="n") step(-1); };
+  document.addEventListener("keydown",key);
+  let sx=null; el.addEventListener("touchstart",e=>sx=e.touches[0].clientX,{passive:true}); el.addEventListener("touchend",e=>{ if(sx==null) return; const dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>50) step(dx>0?1:-1); sx=null; });
+}
+
+boot();
+</script>

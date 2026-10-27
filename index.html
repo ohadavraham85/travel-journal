@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0B1226">
+<title>יומן מסעות</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Frank+Ruhl+Libre:wght@500;700;900&family=Assistant:wght@400;600;700;800&display=swap">
+<style>
+/* Stage 0 placeholder — the full app replaces this in stage 1. */
+:root{
+  color-scheme:dark;
+  --night:#0B1226; --ink:#F6F1E7; --muted:#A9B3CF;
+  --gold:#FFC74A; --rose:#FF5A6E; --teal:#3FD6CB;
+  --f-hand:"Amatic SC","Frank Ruhl Libre",serif;
+  --f-display:"Frank Ruhl Libre",Georgia,serif;
+  --f-body:"Assistant",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--night);min-height:100%}
+body{color:var(--ink);font-family:var(--f-body);direction:rtl;min-height:100vh;display:grid;place-items:center;text-align:center;padding:max(16px,env(safe-area-inset-top)) 16px max(16px,env(safe-area-inset-bottom))}
+.sky{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(1200px 600px at 85% -10%,#24306a 0%,transparent 60%),radial-gradient(900px 500px at 0% 20%,#3a1d4a55 0%,transparent 60%),var(--night)}
+.sky canvas{width:100%;height:100%;display:block}
+h1{font-family:var(--f-hand);font-size:4rem;margin:.2em 0 0;line-height:1}
+p{font-family:var(--f-display);color:var(--muted);font-size:1.15rem;margin:.4em 0 0}
+svg.logo{width:120px;height:120px}
+</style>
+</head>
+<body>
+<div class="sky"><canvas id="stars"></canvas></div>
+<main>
+  <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#FF5A6E" stroke-width="2.5" stroke-dasharray="4 4"/><path d="M9 27c4-1 5-11 11-11s5 7 11 4" fill="none" stroke="#FFC74A" stroke-width="3" stroke-linecap="round"/><circle cx="9" cy="27" r="3.4" fill="#FFC74A"/><circle cx="31" cy="20" r="3.4" fill="#0B1226" stroke="#3FD6CB" stroke-width="2.5"/></svg>
+  <h1>יומן מסעות</h1>
+  <p>האפליקציה בבנייה – בקרוב כאן</p>
+</main>
+<script>
+(() => {
+  const c = document.getElementById("stars"), x = c.getContext("2d");
+  let stars = [];
+  function size(){
+    const d = devicePixelRatio || 1;
+    c.width = innerWidth * d; c.height = innerHeight * d;
+    stars = Array.from({length: Math.round(innerWidth * innerHeight / 5000)}, () => ({x: Math.random() * c.width, y: Math.random() * c.height, r: (Math.random() * 1.2 + .3) * d, p: Math.random() * 6.28, s: Math.random() * .002 + .0006}));
+  }
+  function draw(t){
+    x.clearRect(0, 0, c.width, c.height);
+    for (const s of stars){ x.globalAlpha = .35 + .65 * Math.abs(Math.sin(s.p + t * s.s)); x.fillStyle = "#F6F1E7"; x.beginPath(); x.arc(s.x, s.y, s.r, 0, 6.28); x.fill(); }
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) requestAnimationFrame(draw);
+  }
+  addEventListener("resize", size); size(); requestAnimationFrame(draw);
+})();
+if ("serviceWorker" in navigator) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+</script>
+</body>
+</html>

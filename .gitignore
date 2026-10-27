@@ -1,3 +1,7 @@
+# נתונים אישיים – לעולם לא לריפו
 data/
 *.zip
+travel-journal-handoff/
 .env
+.DS_Store
+node_modules/
